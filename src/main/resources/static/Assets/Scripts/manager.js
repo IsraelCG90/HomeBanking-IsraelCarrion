@@ -11,26 +11,35 @@ createApp({
         
     };
   },
+
   created(){
-    this.getData();
+    this.loadData();
   },
+
   methods:{
-    getData(){
-        axios('http://localhost:8080/clients')
+    loadData(){
+        axios.get('http://localhost:8080/clients')
         .then(({data}) => {
             this.clients = data._embedded.clients;
-            console.log(this.clients)
             this.clientsText = data;
         })
         .catch(err => console.log(err))
     },
-    loadData(){
+    addClient() {
+      if (this.firstName == "" || this.lastName == "" || this.email == "") {
+          alert("Debe completar los campos");
+      } else {
+          this.postClient();
+      }
+    },
+    postClient(){
         axios.post('http://localhost:8080/clients', {
             firstName: this.firstName,
             lastName: this.lastName,
             email: this.email
         })
-        window.location.reload();
+        .catch(err => console.log(err))
+        this.loadData();
     }
   },
 }).mount("#app");
