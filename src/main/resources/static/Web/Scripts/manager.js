@@ -8,7 +8,6 @@ createApp({
         firtName:"",
         lastName:"",
         email:""
-        
     };
   },
 

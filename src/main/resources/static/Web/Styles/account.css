@@ -1,0 +1,42 @@
+main{
+    background-color: #fcbc8118; 
+}
+
+.accountDetail{
+    width: 90%;
+    font-size: 0.8rem;
+}
+
+.debit{
+    color: red !important;
+    font-weight: 600;
+}
+
+.credit{
+    color: green !important;
+    font-weight: 600;
+}
+
+.rowBorder{
+    border-top: 1px solid coral;
+    border-bottom: 1px solid coral;
+}
+
+.headerRow{
+    border-bottom: 1px solid coral;
+}
+
+.card-subtitle{
+    font-size: 1.5rem !important;
+}
+
+.card-text {
+    font-size: 1.3rem !important;
+}
+
+@media (min-width: 768px) { 
+    .accountDetail{
+        width: 60%;
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,46 @@
+main{
+    background-color: #fcbc8118; 
+}
+
+.card{
+    width: 90%;
+}
+
+.cardHeader{
+    margin: 1rem 0rem;
+    border-end-end-radius: 2rem;
+    border-start-end-radius: 2rem;
+    border-start-start-radius: 0rem;
+    background-color: #e74c67;
+    width: 17rem;
+    font-weight: 600;
+    color: white;
+    font-size: 1.5rem;
+    background: rgb(231,76,103);
+    background: linear-gradient(90deg, rgba(231,76,103,1) 10%, rgba(251,158,66,1) 73%, rgba(251,227,187,1) 100%);
+}
+
+.aCard{
+    text-decoration: none;
+    color: coral;
+}
+
+.cardWomen{
+    width: 90%;
+    height: 15rem;
+    object-fit: cover;
+    border-radius: 0.3rem;
+}
+
+@media (min-width: 768px) { 
+    .card{
+        width: 80%;
+    }
+    .cardWomen{
+        margin: 1rem;
+    }
+    .cardHeader{
+        width: 20rem;
+    }
+
+}

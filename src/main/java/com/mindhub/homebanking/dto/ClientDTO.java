@@ -12,6 +12,7 @@ public class ClientDTO {
     private String email;
     private List<AccountDTO> accounts;
 
+    //CONSTRUCTOR
     public ClientDTO(Client client) {
         this.id = client.getId();
         this.firstName = client.getFirstName();
@@ -24,6 +25,7 @@ public class ClientDTO {
                 .collect(Collectors.toList());
     }
 
+    //GETTERS
     public Long getId() {
         return id;
     }

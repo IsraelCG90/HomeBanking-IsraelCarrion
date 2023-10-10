@@ -1,7 +1,0 @@
-
-@media (min-width: 992px) { 
-    #app{
-        display: flex;
-        justify-content: space-around;
-    }
-}
