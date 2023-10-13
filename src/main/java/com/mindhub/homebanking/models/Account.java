@@ -84,15 +84,4 @@ public class Account {
         transactions.add(transaction);
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
-                ", creationDate=" + creationDate +
-                ", balance=" + balance +
-                ", client=" + client +
-                ", transactions=" + transactions +
-                '}';
-    }
 }

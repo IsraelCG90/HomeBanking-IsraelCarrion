@@ -5,6 +5,7 @@ createApp({
     return {
         accounts: [],
         name:"",
+        loans:[]
     };
   },
 
@@ -18,6 +19,7 @@ createApp({
         .then( ({data}) => {
             this.accounts = data.accounts;
             this.name = data.firstName;
+            this.loans = data.loans;
         })
         .catch(err => console.log(err))
     },

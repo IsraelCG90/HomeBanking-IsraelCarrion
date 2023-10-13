@@ -30,7 +30,6 @@ footer{
 }
 
 .redes{
-    /* color: #e74c67; */
     font-size: 2rem;
     background: linear-gradient(#e74c67,#fb9e42);
     -webkit-background-clip: text;
@@ -39,7 +38,6 @@ footer{
 
 .p{
     font-weight: 700;
-    /* color: #fb9e42; */
     font-size: 1.5rem;
     background: linear-gradient(#e74c67,#fb9e42);
     -webkit-background-clip: text;

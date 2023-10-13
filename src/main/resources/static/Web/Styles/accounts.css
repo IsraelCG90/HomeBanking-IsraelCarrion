@@ -2,7 +2,47 @@ main{
     background-color: #fcbc8118; 
 }
 
+.welcome{
+    color: rgb(104, 102, 102);
+}
+
+.cardAcount{
+    border: none !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .13), 0 1px 1px 0 rgba(0, 0, 0, .11);
+}
+
+.card-body{
+    font-size: 1.1rem ;
+}
+
+span{
+    text-decoration: underline;
+}
+
 .aAcounts{
     text-decoration: none;
     color: coral;
+    font-size: 1.1rem;
 }
+
+.table{
+    width: 90%;
+    font-size: 0.8rem;
+}
+
+.rowBorder{
+    border-top: 1px solid coral;
+    border-bottom: 1px solid coral;
+}
+
+.headerRow{
+    border-bottom: 1px solid coral;
+}
+
+@media (min-width: 768px) { 
+    .table{
+        width: 60%;
+        font-size: 1rem;
+    }
+}
+

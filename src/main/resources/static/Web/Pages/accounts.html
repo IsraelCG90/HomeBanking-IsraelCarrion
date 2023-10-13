@@ -42,17 +42,37 @@
             </nav>
         </header>
         <main>
-            <h1 class="m-4 text-center">Welcome {{name}}!</h1>
+            <h1 class="m-4 text-center welcome">Welcome {{name}}!</h1>
             <div class="d-flex justify-content-center flex-wrap gap-4">
-                <div v-for="account of accounts" class="card" style="width: 18rem;">
+                <div v-for="account of accounts" class="card cardAcount" style="width: 18rem;">
                     <div class="card-body">
                       <h5 class="card-title">Account number: {{account.number}} </h5>
-                      <h6 class="card-subtitle mb-2 text-body-secondary">Amount</h6>
+                      <h6 class="card-subtitle mt-2 text-body-secondary">Amount</h6>
                       <p class="card-text"> $ {{account.balance}}</p>
-                      <p class="card-text">Creation date: {{account.creationDate}}</p>
+                      <p class="card-text"><span>Creation date</span>: {{account.creationDate}}</p>
                       <a :href="`./account.html?id=${account.id}`" class="aAcounts m-0">See yours moviments <i class="bi bi-chevron-right"></i></a>
                     </div>
                 </div>
+            </div>
+            <div class="mt-5 d-flex flex-column align-items-center">
+                <h3 class="welcome mb-3">Acquired Loans</h3>
+                <table v-if="loans.length > 0" class="table">
+                    <thead>
+                        <tr class="headerRow">
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th class=" text-center">N° Quotas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rowBorder" v-for="loan of loans">
+                            <td>{{ loan.name }}</td>
+                            <td>{{ loan.amount }}</td>
+                            <td class="text-center">{{ loan.payments }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4 v-else>You didn't apply for any loan</h4>
             </div>
         </main>
         <footer class="d-flex flex-column flex-md-row justify-content-around align-items-center">
