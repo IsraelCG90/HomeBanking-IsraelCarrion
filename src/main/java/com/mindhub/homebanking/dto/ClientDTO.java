@@ -12,6 +12,7 @@ public class ClientDTO {
     private String email;
     private List<AccountDTO> accounts;
     private List<ClientLoanDTO> loans;
+    private List<CardDTO> cards;
 
     //CONSTRUCTOR
     public ClientDTO(Client client) {
@@ -28,6 +29,11 @@ public class ClientDTO {
                 .getClientLoans()
                 .stream()
                 .map(e -> new ClientLoanDTO(e))
+                .collect(Collectors.toList());
+        this.cards = client
+                .getCards()
+                .stream()
+                .map(e -> new CardDTO(e))
                 .collect(Collectors.toList());
     }
 
@@ -55,4 +61,9 @@ public class ClientDTO {
     public List<ClientLoanDTO> getLoans() {
         return loans;
     }
+
+    public List<CardDTO> getCards() {
+        return cards;
+    }
+
 }

@@ -25,7 +25,7 @@
                                 <a class="nav-link" href="./accounts.html">Accounts</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Cards</a>
+                                <a class="nav-link" href="./cards.html">Cards</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Loans</a>
@@ -62,7 +62,7 @@
                         </thead>
                         <tbody>
                             <tr class="rowBorder" v-for="transaction of account.transactions">
-                                <td v-if="transaction.type == 'DEBIT'" class="debit">{{ transaction.type }}</td>
+                                <td v-if="transaction.type == 'DEBITT'" class="debit">{{ transaction.type }}</td>
                                 <td v-else class="credit">{{ transaction.type }}</td>
                                 <td>{{ transaction.amount }}</td>
                                 <td> {{ dateFormat(transaction.date) }}</td>

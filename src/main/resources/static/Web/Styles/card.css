@@ -1,0 +1,93 @@
+main {
+    background-color: #fcbc8118;
+}
+
+h2 {
+    color: rgb(104, 102, 102);
+}
+
+.card {
+    width: 19rem;
+    height: 11.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-image: linear-gradient(145deg,
+            hsl(295, 55%, 37%) 27%,
+            hsl(320, 69%, 39%) 54%,
+            hsl(338deg 66% 50%) 64%,
+            hsl(357deg 80% 62%) 70%,
+            hsl(15deg 93% 63%) 74%,
+            hsl(30deg 96% 62%) 78%,
+            hsl(26deg 73% 54%) 81%,
+            hsl(22deg 66% 46%) 85%,
+            hsl(17deg 70% 38%) 90%,
+            hsl(11deg 76% 30%) 94%,
+            hsl(0deg 91% 22%) 100%);
+}
+
+.info {
+    position: absolute;
+    top: 5%;
+    left: 68%;
+    zoom: 1;
+    filter: alpha(opacity=0);
+    opacity: 0; 
+    padding: 5px;
+    color: white;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0);
+    -moz-transition:all ease .8s;
+    -webkit-transition:all ease .8s ;
+    transition:all ease .8s;
+}
+
+.card:hover .info {
+    filter: alpha(opacity=0);
+    opacity: .9;
+}
+
+.cardLogo {
+    width: 8rem;
+}
+
+.colorCard{
+    font-size: 0.6rem;
+    color: 	white;
+    font-weight: 600;
+}
+
+.cardNumber {
+    color: white;
+    font-weight: 500;
+    font-variant-numeric: oldstyle-nums;
+    font-size: 1.2rem;
+}
+
+.cardName {
+    color: white;
+    font-weight: 600;
+}
+
+.pData {
+    font-size: 0.5rem;
+    color: white;
+    font-weight: 600;
+}
+
+span {
+    font-size: 0.8rem;
+}
+
+.visa {
+    width: 3.5rem;
+}
+
+.chip {
+    width: 2.3rem;
+}
+
+.nfc {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    filter: invert(1);
+}

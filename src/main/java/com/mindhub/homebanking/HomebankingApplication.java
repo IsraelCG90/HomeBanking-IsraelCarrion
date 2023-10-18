@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.mindhub.homebanking.models.TransactionType.*;
+import static com.mindhub.homebanking.models.CardType.*;
+import static com.mindhub.homebanking.models.CardColor.*;
 
 @SpringBootApplication
 public class HomebankingApplication {
@@ -20,41 +22,47 @@ public class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return args -> {
-			//CLIENT 1
+			//CLIENT-1
 			Client melba = new Client("Melba", "Morel", "melbam@gmail.com");
 			clientRepository.save(melba);
 
+			//ACCOUNT-1 CLIENT-1
 			Account melbaA1 = new Account("VIN001", LocalDate.now(), 5000);
 			melba.addAccount(melbaA1);
 			accountRepository.save(melbaA1);
 
-			Transaction melbaA1T = new Transaction(CREDIT, 2500, "Buy a iPhone", LocalDateTime.now());
+			//TRANSACTIONS CLIENT-1 ACCOUNT-1
+			Transaction melbaA1T = new Transaction(CREDITT, 2500, "Buy a iPhone", LocalDateTime.now());
 			melbaA1.addTransaction(melbaA1T);
 			transactionRepository.save(melbaA1T);
 
-			Transaction melbaA1T2 = new Transaction(DEBIT, -500, "Buy a case", LocalDateTime.now());
+			Transaction melbaA1T2 = new Transaction(DEBITT, -500, "Buy a case", LocalDateTime.now());
 			melbaA1.addTransaction(melbaA1T2);
 			transactionRepository.save(melbaA1T2);
 
+			//ACCOUNT-2 CLIENT-1
 			Account melbaA2 = new Account("VIN002", LocalDate.now().plusDays(1), 7500);
 			melba.addAccount(melbaA2);
 			accountRepository.save(melbaA2);
 
-			Transaction melbaA2T = new Transaction(DEBIT, -350, "Tax payment", LocalDateTime.now());
+			//TRANSACTION CLIENT-1 ACCOUNT-2
+			Transaction melbaA2T = new Transaction(DEBITT, -350, "Tax payment", LocalDateTime.now());
 			melbaA2.addTransaction(melbaA2T);
 			transactionRepository.save(melbaA2T);
 
-			//CLIENT 2
+			//CLIENT-2
 			Client israel = new Client("Israel", "Carrion", "israelcarrion.g@gmail.com");
 			clientRepository.save(israel);
 
+			//ACCOUNT-1 CLIENT-2
 			Account israelA1 = new Account("VIN001", LocalDate.now(), 8500);
 			israel.addAccount(israelA1);
 			accountRepository.save(israelA1);
 
-			Transaction israelA1T = new Transaction(CREDIT, 5000, "Buy Mac", LocalDateTime.now());
+			//TRANSACTION CLIENT-2 ACCOUNT-1
+			Transaction israelA1T = new Transaction(CREDITT, 5000, "Buy Mac", LocalDateTime.now());
 			israelA1.addTransaction(israelA1T);
 			transactionRepository.save(israelA1T);
 
@@ -68,6 +76,7 @@ public class HomebankingApplication {
 			Loan l3 = new Loan("Automotive", 300000.00, List.of(6, 12, 24, 36));
 			loanRepository.save(l3);
 
+			//LOANS CLIENT-1
 			ClientLoan melbaL1 = new ClientLoan(400000.00, 60);
 			melba.addClientLoan(melbaL1);
 			l1.addClientLoan(melbaL1);
@@ -78,6 +87,7 @@ public class HomebankingApplication {
 			l2.addClientLoan(melbaL2);
 			clientLoanRepository.save(melbaL2);
 
+			//LOANS CLIENT-2
 			ClientLoan israelL1 = new ClientLoan(100000.00, 24);
 			israel.addClientLoan(israelL1);
 			l2.addClientLoan(israelL1);
@@ -87,6 +97,21 @@ public class HomebankingApplication {
 			israel.addClientLoan(israelL2);
 			l3.addClientLoan(israelL2);
 			clientLoanRepository.save(israelL2);
+
+			//CLIENT-1 CARD-1
+			Card melbaC1 = new Card(melba.nameCard(), DEBIT, GOLD, "4055-1600-1739-7609", 185, LocalDate.now(), LocalDate.now().plusYears(5));
+			melba.addCard(melbaC1);
+			cardRepository.save(melbaC1);
+
+			//CLIENT-1 CARD-2
+			Card melbaC2 = new Card(melba.nameCard(), CREDIT, TITANIUM, "4055-1600-1739-3300", 963, LocalDate.now(), LocalDate.now().plusYears(5));
+			melba.addCard(melbaC2);
+			cardRepository.save(melbaC2);
+
+			//CLIENT-2 CARD-1
+			Card israelC1 = new Card(israel.nameCard(), CREDIT, SILVER, "4111-9729-7856-5783", 663, LocalDate.now(), LocalDate.now().plusYears(5));
+			israel.addCard(israelC1);
+			cardRepository.save(israelC1);
 
 		};
 	}

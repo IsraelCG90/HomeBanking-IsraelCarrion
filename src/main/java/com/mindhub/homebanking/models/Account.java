@@ -34,6 +34,11 @@ public class Account {
         this.balance = balance;
     }
 
+    //GETTER ID
+    public Long getId() {
+        return id;
+    }
+
     //GETTER & SETTERS
     public String getNumber() {
         return number;
@@ -57,11 +62,6 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
-    }
-
-    //GETTER ID
-    public Long getId() {
-        return id;
     }
 
     //GETTER @OneToMany

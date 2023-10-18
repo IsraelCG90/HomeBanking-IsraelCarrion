@@ -8,11 +8,21 @@ main{
 
 .cardHeader{
     margin: 1rem 0rem;
-    border-end-end-radius: 2rem;
-    border-start-end-radius: 2rem;
-    border-start-start-radius: 0rem;
+    border-radius: 0rem 2rem 2rem 0rem;
     background-color: #e74c67;
-    width: 17rem;
+    width: 18rem;
+    font-weight: 600;
+    color: white;
+    font-size: 1.5rem;
+    background: rgb(231,76,103);
+    background: linear-gradient(90deg, rgba(231,76,103,1) 10%, rgba(251,158,66,1) 73%, rgba(251,227,187,1) 100%);
+}
+
+.cardHeaderTwo{
+    margin: 1rem 0rem;
+    border-radius: 2rem 0rem 0rem 2rem;
+    background-color: #e74c67;
+    width: 18rem;
     font-weight: 600;
     color: white;
     font-size: 1.5rem;
