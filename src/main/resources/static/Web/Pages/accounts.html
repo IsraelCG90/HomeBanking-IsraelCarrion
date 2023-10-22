@@ -6,8 +6,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="../Styles/style.css">
-    <link rel="stylesheet" href="../Styles/accounts.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/accounts.css">
     <title>Accounts</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
         <header class="cabezera">
             <nav class="navbar navbar-expand-md">
                 <div class="container-fluid">
-                    <a class="navbar-brand fs-1" href="../../index.html"><img class="logotip" src="../Images/Logotip.jpg" alt="logotip"></a>
+                    <a class="navbar-brand fs-1" href="../index.html"><img class="logotip" src="../images/Logotip.jpg" alt="logotip"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
                                 <a class="nav-link" href="#">Transactions</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link button-85" href="#"><i class="bi bi-box-arrow-right"></i></a>
+                                <a class="nav-link button-85" href="#" @click="logout"><i class="goOut bi bi-box-arrow-left"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -45,13 +45,27 @@
         <main>
             <h1 class="m-4 text-center welcome">Welcome {{name}}!</h1>
             <div class="d-flex justify-content-center flex-wrap gap-4">
-                <div v-for="account of accounts" data-aos="flip-left" class="card cardAcount" style="width: 18rem;">
+                <div v-for="account of accounts" data-aos="flip-left" class="card cardAcount align-items-center" style="width: 18rem;">
                     <div class="card-body">
-                      <h5 class="card-title">Account number: {{account.number}} </h5>
-                      <h6 class="card-subtitle mt-2 text-body-secondary">Amount</h6>
-                      <p class="card-text"> $ {{account.balance}}</p>
-                      <p class="card-text"><span>Creation date</span>: {{account.creationDate}}</p>
-                      <a :href="`./account.html?id=${account.id}`" class="aAcounts m-0">See yours moviments <i class="bi bi-chevron-right"></i></a>
+                        <div class="d-flex align-items-center pt-2 pb-2 justify-content-between">
+                            <img src="../images/account.png" alt="account" class="amount">
+                            <p class="card-text">{{account.number}} </p>
+                        </div>
+                        <div class="d-flex align-items-center pt-2 pb-2 justify-content-between midle">
+                            <div class="d-flex flex-column align-items-center ">
+                                <img src="../images/amount.png" alt="amount" class="amount">
+                                <span>Amount</span>
+                            </div>
+                            <p class="card-text"> $ {{account.balance}}</p>
+                        </div>
+                        <div class="d-flex align-items-center pt-2 pb-2 justify-content-between pb-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="../images/calendar.png" alt="calendar" class="amount">
+                                <span>Creation</span>
+                            </div>
+                            <p class="card-text">{{account.creationDate}}</p>
+                        </div>
+                        <a :href="`./account.html?id=${account.id}`" class="aAcounts">See yours moviments <i class="bi bi-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -95,6 +109,6 @@
     <script>
         AOS.init();
     </script>
-    <script src="../Scripts/accounts.js"></script>
+    <script src="../scripts/accounts.js"></script>
 </body>
 </html>

@@ -2,10 +2,12 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,11 +23,13 @@ public class HomebankingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	@Bean
 	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return args -> {
 			//CLIENT-1
-			Client melba = new Client("Melba", "Morel", "melbam@gmail.com");
+			Client melba = new Client("Melba", "Morel", "melba@gmail.com", passwordEncoder.encode("Melba"),false);
 			clientRepository.save(melba);
 
 			//ACCOUNT-1 CLIENT-1
@@ -53,7 +57,7 @@ public class HomebankingApplication {
 			transactionRepository.save(melbaA2T);
 
 			//CLIENT-2
-			Client israel = new Client("Israel", "Carrion", "israelcarrion.g@gmail.com");
+			Client israel = new Client("Israel", "Carrion", "israelcarrion.g@gmail.com", passwordEncoder.encode("Israel"),false);
 			clientRepository.save(israel);
 
 			//ACCOUNT-1 CLIENT-2
@@ -112,6 +116,10 @@ public class HomebankingApplication {
 			Card israelC1 = new Card(israel.nameCard(), CREDIT, SILVER, "4111-9729-7856-5783", 663, LocalDate.now(), LocalDate.now().plusYears(5));
 			israel.addCard(israelC1);
 			cardRepository.save(israelC1);
+
+			//CLIENT-3 ADMIN
+			Client admin = new Client("Carla", "Carrion", "carlac@gmail.com", "Admin", true);
+			clientRepository.save(admin);
 
 		};
 	}

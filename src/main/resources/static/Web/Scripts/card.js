@@ -14,7 +14,7 @@ createApp({
 
   methods:{
     loadData(){
-        axios.get('/api/clients/1')
+        axios.get('/api/clients/currents')
         .then( ({data}) => {
             this.credit = data.cards.filter(card => card.type == "CREDIT");
             this.debit = data.cards.filter(card => card.type == "DEBIT");
@@ -23,6 +23,12 @@ createApp({
     },
     dateFormat(date) {
         return moment(date).format("MM/YY");
+    },
+    logout(){
+      axios.post('/api/logout')
+      .then( response => {
+        location.pathname="/web/index.html"
+      })
     }
   },
 }).mount("#app");

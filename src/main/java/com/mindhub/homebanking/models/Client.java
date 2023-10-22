@@ -17,6 +17,8 @@ public class Client {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
+    private Boolean admin;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>();
@@ -30,10 +32,13 @@ public class Client {
     //CONSTRUCTORS
     public Client() {
     }
-    public Client(String firstName, String lastName, String email) {
+
+    public Client(String firstName, String lastName, String email, String password, Boolean admin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
+        this.admin = admin;
     }
 
     //GETTER ID
@@ -66,12 +71,28 @@ public class Client {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
     //GETTER @OneToMany
     public Set<Account> getAccounts() {
         return accounts;
     }
 
-    //METOD TO LINK ACCOUNT
+    //METHOD TO LINK ACCOUNT
     public void addAccount(Account account){
         account.setClient(this);
         accounts.add(account);

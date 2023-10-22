@@ -16,13 +16,24 @@ main{
 }
 
 span{
-    text-decoration: underline;
+    font-size: 1rem;
+    color: #e74c67;
 }
 
 .aAcounts{
     text-decoration: none;
-    color: coral;
+    color: #e74c67;
     font-size: 1.1rem;
+}
+
+.midle{
+    border-top: 1px solid #ce75af;
+    border-bottom: 1px solid #ce75af;
+}
+
+.amount{
+    width: 3.5rem;
+    filter: invert(40%) sepia(33%) saturate(6912%) hue-rotate(329deg) brightness(107%) contrast(81%);
 }
 
 .table{
@@ -30,13 +41,21 @@ span{
     font-size: 0.8rem;
 }
 
+.card-text{
+    font-weight: 600;
+}
+
 .rowBorder{
-    border-top: 1px solid coral;
+    border-top: 1px solid #ff7f50;
     border-bottom: 1px solid coral;
 }
 
 .headerRow{
     border-bottom: 1px solid coral;
+}
+
+.goOut{
+    color: black;
 }
 
 @media (min-width: 768px) { 

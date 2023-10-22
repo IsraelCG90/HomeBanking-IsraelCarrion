@@ -15,7 +15,7 @@ createApp({
 
   methods:{
     loadData(){
-        axios.get('/api/clients/1')
+        axios.get('/api/clients/currents')
         .then( ({data}) => {
             this.accounts = data.accounts;
             this.name = data.firstName;
@@ -23,5 +23,11 @@ createApp({
         })
         .catch(err => console.log(err))
     },
+    logout(){
+      axios.post('/api/logout')
+      .then( response => {
+        location.pathname="/web/index.html"
+      })
+    }
   },
 }).mount("#app");
