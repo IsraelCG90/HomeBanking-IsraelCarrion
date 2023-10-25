@@ -44,7 +44,7 @@
         <main>
             <div class="d-flex flex-column align-items-center pb-5">
                 <h2 class="mt-4">Credit Cards</h2>
-                <div class="d-flex flex-column align-items-center gap-3">
+                <div class="d-flex flex-column align-items-center gap-3 flex-md-row">
                     <div v-if="credit.length != 0" v-for="card of credit" class="card d-flex align-items-center">
                         <span class="info">CVV: {{card.cvv}}</span>
                         <div class="d-flex justify-content-between w-100 mt-2 ms-1">
@@ -67,8 +67,11 @@
                     </div>
                     <h6 v-else>You don't have credit cards.</h6>
                 </div>
+                <div class="d-flex justify-content-center pt-4" v-if="credit.length < 3">
+                    <a type="button" href="./create-cards.html" class="aAcounts">New Credit Card <i class="bi bi-chevron-right"></i></a>
+                </div>
                 <h2 class="mt-5">Debit Cards</h2>
-                <div class="d-flex flex-column align-items-center gap-3 " >
+                <div class="d-flex flex-column align-items-center gap-3 flex-md-row" >
                     <div v-if="debit.length != 0" v-for="card of debit" class="card d-flex align-items-center">
                         <span class="info">CVV: {{card.cvv}}</span>
                         <div class="d-flex justify-content-between w-100 mt-2 ms-1">
@@ -90,6 +93,9 @@
                       </div>
                     </div>
                     <h6 v-else>You don't have credit cards.</h6>
+                </div>
+                <div class="d-flex justify-content-center pt-4" v-if="debit.length < 3">
+                    <a type="button" href="./create-cards.html" class="aAcounts">New Debit Card <i class="bi bi-chevron-right"></i></a>
                 </div>
             </div>
         </main>

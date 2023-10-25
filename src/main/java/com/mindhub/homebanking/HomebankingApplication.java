@@ -103,17 +103,17 @@ public class HomebankingApplication {
 			clientLoanRepository.save(israelL2);
 
 			//CLIENT-1 CARD-1
-			Card melbaC1 = new Card(melba.nameCard(), DEBIT, GOLD, "4055-1600-1739-7609", 185, LocalDate.now(), LocalDate.now().plusYears(5));
+			Card melbaC1 = new Card(melba.nameCard(), DEBIT, GOLD, "4055-1600-1739-7609", "185", LocalDate.now(), LocalDate.now().plusYears(5));
 			melba.addCard(melbaC1);
 			cardRepository.save(melbaC1);
 
 			//CLIENT-1 CARD-2
-			Card melbaC2 = new Card(melba.nameCard(), CREDIT, TITANIUM, "4055-1600-1739-3300", 963, LocalDate.now(), LocalDate.now().plusYears(5));
+			Card melbaC2 = new Card(melba.nameCard(), CREDIT, TITANIUM, "4055-1600-1739-3300", "963", LocalDate.now(), LocalDate.now().plusYears(5));
 			melba.addCard(melbaC2);
 			cardRepository.save(melbaC2);
 
 			//CLIENT-2 CARD-1
-			Card israelC1 = new Card(israel.nameCard(), CREDIT, SILVER, "4111-9729-7856-5783", 663, LocalDate.now(), LocalDate.now().plusYears(5));
+			Card israelC1 = new Card(israel.nameCard(), CREDIT, SILVER, "4111-9729-7856-5783", "663", LocalDate.now(), LocalDate.now().plusYears(5));
 			israel.addCard(israelC1);
 			cardRepository.save(israelC1);
 

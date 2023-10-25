@@ -91,3 +91,9 @@ span {
     object-fit: cover;
     filter: invert(1);
 }
+
+.aAcounts{
+    text-decoration: none;
+    color: #e74c67;
+    font-size: 1.1rem;
+}

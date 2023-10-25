@@ -21,10 +21,12 @@ public class WebAuthorization{
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers("/web/index.html", "/web/pages/login.html", "/web/pages/register.html", "/web/styles/**", "/web/scripts/**", "/web/images/**").permitAll()
+                .antMatchers("/web/index.html", "/web/pages/login.html", "/web/pages/register.html", "/web/styles/**", "/web/scripts/**", "/web/images/**", "/api/clients/currents").permitAll()
                 .antMatchers("/h2-console/**", "/rest/**", "/web/pages/manager.html").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/clients").hasAuthority("ADMIN")
-                .anyRequest().authenticated();
+                .antMatchers("/web/pages/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/clients/current/cards").authenticated()
+                .anyRequest().denyAll();
 
         // turn off checking for CSRF tokens
         http.csrf().disable();

@@ -25,6 +25,7 @@ createApp({
                             location.pathname = "/web/pages/accounts.html"
                         })
                         .catch(err => console.log(err))
+                    axios.post('/api/clients/current/accounts')
                 })
                 .catch((error) => {
                     console.error("Error registering user:", error);

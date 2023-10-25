@@ -69,6 +69,9 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex justify-content-center pt-4">
+                <a type="button" class="aAcounts" @click="createAccount" v-if="accounts.length < 3">Create New Account <i class="bi bi-chevron-right"></i></a>
+            </div>
             <div class="mt-5 d-flex flex-column align-items-center">
                 <h3 class="welcome mb-3">Acquired Loans</h3>
                 <table v-if="loans.length > 0" class="table">
