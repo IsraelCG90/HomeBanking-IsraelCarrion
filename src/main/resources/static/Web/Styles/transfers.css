@@ -2,28 +2,100 @@ main{
     background-color: #fcbc8118; 
 }
 
-.aAcounts{
-    text-decoration: none;
-    color: #e74c67;
+.card {
+	width: 20rem;
+    margin: auto;
+    background: white;
+    position:center;
+    align-self: center;
+    top: 50rem;
+    border-radius: 1.5rem;
+    box-shadow: 4px 3px 20px #3535358c;
+    display:flex;
+    flex-direction: row;
+}
+
+.rightside {
+    background-color: #ffffff;
+	width: 35rem;
+	border-bottom-right-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    padding: 1rem 2rem 3rem 3rem;
+}
+
+p {
+    display:block;
     font-size: 1.1rem;
+    font-weight: 400;
+    margin: .8rem 0;
 }
 
-h4{
-    color: rgb(99, 97, 97);
-}
-  
-.card{
-    background-color: rgb(255, 255, 255);
+.inputbox {
+    color:#030303;
+	width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1.5px solid #ccc;
+    margin-bottom: 1rem;
+    border-radius: 0.3rem;
+    font-family: 'Roboto', sans-serif;
+    color: #615a5a;
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline:none;
 }
 
+.button{
+    background: linear-gradient(135deg, #ce75af 0%, #fcbc81 100%);
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin-top: 10px;
+    width:100%;
+    letter-spacing: .11rem;
+    outline:none;
+}
+
+.button:hover{
+	transform: scale(1.05) translateY(-3px);
+    box-shadow: 3px 3px 6px #38373785;
+}
+
+@media only screen and (max-width: 1000px) {
+    .card{
+        flex-direction: column;
+        width: auto;
+      
+    }
+
+    .leftside{
+        width: 100%;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius:0;
+        border-radius:0;
+    }
+
+    .rightside{
+        width:auto;
+        border-bottom-left-radius: 1.5rem;
+        padding:0.5rem 3rem 3rem 2rem;
+        border-radius:0;
+    }
+}
+
+/*RADIOS*/
 .form {
     --background: rgba(255, 255, 255, 0.753);
-    --text: #080808;
+    --text: #2c2c2c;
     --radio: #ce75af;
     --radio-checked: #fb9e42;
     --radio-size: 23px;
-    --width: 150px;
-    --height: 150px;
+    --width: 20rem;
+    --height: 50px;
     --border-radius: 10px;
     background: var(--background);
     width: var(--width);
@@ -144,5 +216,4 @@ h4{
   
 .socials > a:hover {
     --scale: 1;
-}
-  
+} 

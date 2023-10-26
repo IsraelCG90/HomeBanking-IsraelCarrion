@@ -9,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -31,15 +29,14 @@ public class AccountController {
     }
 
     public String accountNumber() {
-        int quantityOfNumbers = getRandomNumber(3, 8);
         StringBuilder accountNumber;
         do {
             accountNumber = new StringBuilder();
-            for (byte i = 0; i <= quantityOfNumbers; i++) {
+            for (byte i = 0; i <= 8; i++) {
                 accountNumber.append(getRandomNumber(0, 9));
             }
-        } while (accountRepository.existsByNumber("VIN-" + accountNumber));
-        return "VIN-" + accountNumber;
+        } while (accountRepository.existsByNumber("VIN" + accountNumber));
+        return "VIN" + accountNumber;
     }
     
     @Autowired
@@ -69,6 +66,11 @@ public class AccountController {
         accountRepository.save(account);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping("/clients/current/accounts")
+    public Set<AccountDTO> getAccount(Authentication authentication) {
+        return clientRepository.findByEmail(authentication.getName()).getAccounts().stream().map(account -> new AccountDTO(account)).collect(Collectors.toSet());
     }
 
 }

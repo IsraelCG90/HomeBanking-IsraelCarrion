@@ -32,7 +32,7 @@
                                 <a class="nav-link" href="#">Loans</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Transactions</a>
+                                <a class="nav-link" href="./transfers.html">Transactions</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link button-85" href="#" @click="logout"><i class="bi bi-box-arrow-left"></i></a>
@@ -46,37 +46,25 @@
             <div class="d-flex flex-column align-items-center pb-5">
                 <div class="card p-3 mt-3">
                     <h4>Select the type of your card</h4>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="card" value="CREDIT" v-model="typeCard" id="credit">
-                        <label class="form-check-label" for="credit">
-                          Credit
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="card" value="DEBIT" v-model="typeCard" id="debit" >
-                        <label class="form-check-label" for="debit">
-                          Debit
-                        </label>
-                    </div>
+                    <form class="d-flex justify-content-center">
+                        <div class="form">
+                            <label class="form-check-label" for="debit"> Debit </label>
+                            <input class="form-check-input" type="radio" name="card" value="DEBIT" v-model="typeCard" id="debit" >
+                            <label class="form-check-label" for="credit"> Credit </label>
+                            <input class="form-check-input" type="radio" name="card" value="CREDIT" v-model="typeCard" id="credit">
+                        </div>
+                    </form>
                     <h4>Select the color of your card</h4>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="color" value="GOLD" v-model="colorCard" id="gold">
-                        <label class="form-check-label" for="gold">
-                          Gold
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="color" value="SILVER" v-model="colorCard" id="silver" >
-                        <label class="form-check-label" for="silver">
-                          Silver
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="color" value="TITANIUM" v-model="colorCard" id="titanium" >
-                        <label class="form-check-label" for="titanium">
-                          Titanium
-                        </label>
-                    </div>
+                    <form class="d-flex justify-content-center">
+                        <div class="form gap-3">
+                            <label class="form-check-label" for="gold"> Gold </label>
+                            <input class="form-check-input" type="radio" name="color" value="GOLD" v-model="colorCard" id="gold">
+                            <label class="form-check-label" for="silver"> Silver </label>
+                            <input class="form-check-input" type="radio" name="color" value="SILVER" v-model="colorCard" id="silver" >
+                            <label class="form-check-label" for="titanium"> Titanium </label>
+                            <input class="form-check-input" type="radio" name="color" value="TITANIUM" v-model="colorCard" id="titanium" >
+                        </div>
+                    </form>
                     <div class="d-flex justify-content-center pt-4">
                         <a type="button" class="aAcounts" @click="createCard">Create New Card <i class="bi bi-chevron-right"></i></a>
                     </div>

@@ -41,12 +41,15 @@ public class ClientController {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
-    public String accountNumber(){
-        String numberAccount = "VIN" + String.valueOf(getRandomNumber(0, 999));
-        while (accountRepository.existsByNumber(numberAccount)){
-            numberAccount = "VIN" + String.valueOf(getRandomNumber(0, 999));
-        }
-        return numberAccount;
+    public String accountNumber() {
+        StringBuilder accountNumber;
+        do {
+            accountNumber = new StringBuilder();
+            for (byte i = 0; i <= 8; i++) {
+                accountNumber.append(getRandomNumber(0, 9));
+            }
+        } while (accountRepository.existsByNumber("VIN" + accountNumber));
+        return "VIN" + accountNumber;
     }
 
     @PostMapping("/clients")
@@ -83,7 +86,7 @@ public class ClientController {
         return new ResponseEntity<>("Client created successfully", HttpStatus.CREATED);
     }
 
-    @RequestMapping("/clients/currents")
+    @RequestMapping("/clients/current")
     public ClientDTO getClientCurrent(Authentication authentication){
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }

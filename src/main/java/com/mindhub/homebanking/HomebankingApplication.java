@@ -61,7 +61,7 @@ public class HomebankingApplication {
 			clientRepository.save(israel);
 
 			//ACCOUNT-1 CLIENT-2
-			Account israelA1 = new Account("VIN001", LocalDate.now(), 8500);
+			Account israelA1 = new Account("VIN003", LocalDate.now(), 8500);
 			israel.addAccount(israelA1);
 			accountRepository.save(israelA1);
 
