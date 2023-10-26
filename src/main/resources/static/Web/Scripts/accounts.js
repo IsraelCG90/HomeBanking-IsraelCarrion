@@ -15,11 +15,12 @@ createApp({
 
   methods:{
     loadData(){
-        axios.get('/api/clients/currents')
+        axios.get('/api/clients/current')
         .then( ({data}) => {
             this.accounts = data.accounts;
             this.name = data.firstName;
             this.loans = data.loans;
+            this.accounts.sort((a, b) => b.id - a.id);
         })
         .catch(err => console.log(err))
     },

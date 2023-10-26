@@ -14,7 +14,7 @@ createApp({
 
   methods:{
     loadData(){
-        axios.get('/api/clients/currents')
+        axios.get('/api/clients/current')
         .then( ({data}) => {
             this.credit = data.cards.filter(card => card.type == "CREDIT");
             this.debit = data.cards.filter(card => card.type == "DEBIT");

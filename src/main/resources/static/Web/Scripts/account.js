@@ -5,17 +5,20 @@ createApp({
     return {
       id:"",
       account: [],
+      client: []
     };
   },
   created(){
     this.id =  new URLSearchParams(location.search).get("id");
-    this.loadAccount(this.id);
+    this.loadAccount();
   },
   methods:{
-    loadAccount(id){
-        axios.get(`/api/accounts/${id}`)
+    loadAccount(){
+        axios.get("/api/clients/current")
         .then(({data}) => {
-            this.account = data;
+          this.client = data;
+          this.account = this.client.accounts.find(a => a.id == this.id);
+          this.account.transactions.sort((a, b) => b.id - a.id);
         })
         .catch(err => console.log(err))
     },
