@@ -30,7 +30,7 @@ public class CardController {
     }
 
      public String generateNumberCard() {
-        StringBuilder cardNumber; //3973-4475-2239-2248
+        StringBuilder cardNumber;
         do {
             cardNumber = new StringBuilder();
             for (int i = 0; i < 16; i++) {

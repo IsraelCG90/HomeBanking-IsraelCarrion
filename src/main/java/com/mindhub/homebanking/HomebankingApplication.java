@@ -57,7 +57,7 @@ public class HomebankingApplication {
 			transactionRepository.save(melbaA2T);
 
 			//CLIENT-2
-			Client israel = new Client("Israel", "Carrion", "israelcarrion.g@gmail.com", passwordEncoder.encode("Israel"),false);
+			Client israel = new Client("Israel", "Carrion", "israelcarrion.g@gmail.com", passwordEncoder.encode("Israel"),true);
 			clientRepository.save(israel);
 
 			//ACCOUNT-1 CLIENT-2

@@ -22,12 +22,12 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     public void init(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userNameEmail -> {
             Client client = clientRepository.findByEmail(userNameEmail);
-            if (client != null) {
-                return new User(client.getEmail(), client.getPassword(),
-                        (client.getAdmin()) ? AuthorityUtils.createAuthorityList("ADMIN")
-                                            : AuthorityUtils.createAuthorityList("CLIENT"));
-            } else {
+            if (client == null) {
                 throw new UsernameNotFoundException("Unknown user: " + userNameEmail);
+            } else {
+                return new User(client.getEmail(), client.getPassword(),
+                        (client.getIsAdmin()) ? AuthorityUtils.createAuthorityList("ADMIN")
+                                            : AuthorityUtils.createAuthorityList("CLIENT"));
             }
         });
     }

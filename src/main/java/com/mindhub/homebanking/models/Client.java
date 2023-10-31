@@ -18,7 +18,7 @@ public class Client {
     private String lastName;
     private String email;
     private String password;
-    private Boolean admin;
+    private Boolean isAdmin;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>();
@@ -33,12 +33,12 @@ public class Client {
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String email, String password, Boolean admin) {
+    public Client(String firstName, String lastName, String email, String password, Boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.admin = admin;
+        this.isAdmin = isAdmin;
     }
 
     //GETTER ID
@@ -79,12 +79,12 @@ public class Client {
         this.password = password;
     }
 
-    public Boolean getAdmin() {
-        return admin;
+    public Boolean getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     //GETTER @OneToMany

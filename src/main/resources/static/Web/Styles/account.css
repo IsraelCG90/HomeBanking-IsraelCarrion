@@ -7,6 +7,16 @@ main{
     font-size: 0.8rem;
 }
 
+.amount{
+    width: 5rem;
+    filter: invert(40%) sepia(33%) saturate(6912%) hue-rotate(329deg) brightness(107%) contrast(81%);
+}
+
+.amountUser{
+    width: 5rem;
+    filter: invert(40%) sepia(33%) saturate(6912%) hue-rotate(329deg) brightness(107%) contrast(81%);
+}
+
 .debit{
     color: red !important;
     font-weight: 600;
@@ -34,9 +44,56 @@ main{
     font-size: 1.3rem !important;
 }
 
+.card-text-data {
+    font-size: 1.2rem !important;
+}
+
+span{
+    font-size: 1rem;
+    color: #e74c67;
+}
+
+td, th{
+    font-size: 0.6rem;
+    text-align: center;
+}
+
+.containerUser{
+    border-bottom: #e74c67 solid 1px;
+    padding: 1rem 0rem;
+}
+
+.containerAmount{
+    border-bottom: #e74c67 solid 1px;
+    padding: 1rem 0rem;
+}
+
+.containerCreation{
+    padding: 1rem 0rem;
+}
+
+.goOut{
+    color: black;
+}
+
 @media (min-width: 768px) { 
     .accountDetail{
         width: 60%;
         font-size: 1rem;
+    }
+    td, th{
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .amountUser{
+        width: 7rem;
+    }
+
+    .containerUser{
+        padding-right: 5rem ;
+        border-bottom: none;
+        border-right: #e74c67 solid 1px;
+
     }
 }

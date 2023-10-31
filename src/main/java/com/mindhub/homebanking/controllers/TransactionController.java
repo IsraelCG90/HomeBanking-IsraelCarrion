@@ -67,11 +67,11 @@ public class TransactionController {
         transactionRepository.save(fromTransaction);
 
 
-        Transaction toTransaction = new Transaction(CREDITT, amount, description + "from" + originAccount, LocalDateTime.now());
+        Transaction toTransaction = new Transaction(CREDITT, amount, description + " from " + originAccount, LocalDateTime.now());
         toAccount.addTransaction(toTransaction);
         toAccount.setBalance(toAccount.getBalance() + amount);
         transactionRepository.save(toTransaction);
 
-        return new ResponseEntity<>("Card created successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>("The transaction was successful.", HttpStatus.CREATED);
     }
 }

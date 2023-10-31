@@ -45,7 +45,7 @@ public class ClientController {
         StringBuilder accountNumber;
         do {
             accountNumber = new StringBuilder();
-            for (byte i = 0; i <= 8; i++) {
+            for (byte i = 0; i <= 2; i++) {
                 accountNumber.append(getRandomNumber(0, 9));
             }
         } while (accountRepository.existsByNumber("VIN" + accountNumber));
@@ -56,19 +56,19 @@ public class ClientController {
     public ResponseEntity<Object> newClient(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password) {
 
         if (firstName.isEmpty() || firstName.isBlank()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Missing First Name", HttpStatus.FORBIDDEN);
         }
 
         if(lastName.isEmpty() || lastName.isBlank()){
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Missing Last Name", HttpStatus.FORBIDDEN);
         }
 
         if(email.isEmpty() || email.isBlank()){
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Missing Email", HttpStatus.FORBIDDEN);
         }
 
         if(password.isEmpty() || password.isBlank()){
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Missing Password", HttpStatus.FORBIDDEN);
         }
 
         if (clientRepository.findByEmail(email) != null) {

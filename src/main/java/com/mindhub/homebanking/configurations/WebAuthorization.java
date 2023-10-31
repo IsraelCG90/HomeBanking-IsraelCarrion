@@ -28,7 +28,7 @@ public class WebAuthorization{
                 .antMatchers(HttpMethod.POST, "/api/clients/current/**").authenticated()
                 .anyRequest().denyAll();
 
-        // turn off checking for CSRF tokens
+        // turn off checking for CSRF(Cross-Site Request Forgery)tokens
         http.csrf().disable();
 
         //disabling frameOptions so h2-console can be accessed

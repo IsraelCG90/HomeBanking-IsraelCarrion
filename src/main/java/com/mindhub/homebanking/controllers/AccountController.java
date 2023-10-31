@@ -32,7 +32,7 @@ public class AccountController {
         StringBuilder accountNumber;
         do {
             accountNumber = new StringBuilder();
-            for (byte i = 0; i <= 8; i++) {
+            for (byte i = 0; i <= 2; i++) {
                 accountNumber.append(getRandomNumber(0, 9));
             }
         } while (accountRepository.existsByNumber("VIN" + accountNumber));
