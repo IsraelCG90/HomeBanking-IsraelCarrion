@@ -42,26 +42,23 @@ public class CardController {
     }
 
     public String generateCvvCard() {
-        StringBuilder cvvNumber;
-        do {
-            cvvNumber = new StringBuilder();
-            for (byte i = 0; i <= 2; i++) {
-                cvvNumber.append(getRandomNumber(0, 9));
-            }
-        } while (cardRepository.existsByCvv(cvvNumber.toString()));
+        StringBuilder cvvNumber = new StringBuilder();
+        for (byte i = 0; i <= 2; i++) {
+            cvvNumber.append(getRandomNumber(0, 9));
+        }
         return cvvNumber.toString();
     }
 
 
     @PostMapping("/clients/current/cards")
-    public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam String cardType, @RequestParam String cardColor){
+    public ResponseEntity<String> newCard(Authentication authentication, @RequestParam String cardType, @RequestParam String cardColor){
 
-        if (cardType.isEmpty() || cardType.isBlank()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if (cardType.isBlank() || !cardType.equals("DEBIT") && !cardType.equals("CREDIT")) {
+            return new ResponseEntity<>("Missing Card Type", HttpStatus.FORBIDDEN);
         }
 
-        if(cardColor.isEmpty() || cardColor.isBlank()){
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if(cardColor.isBlank() || !cardColor.equals("GOLD") && !cardColor.equals("TITANIUM") && !cardColor.equals("SILVER")){
+            return new ResponseEntity<>("Missing Card Color", HttpStatus.FORBIDDEN);
         }
 
         Client client = clientRepository.findByEmail(authentication.getName());

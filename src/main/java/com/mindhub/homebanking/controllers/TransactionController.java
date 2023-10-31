@@ -31,7 +31,7 @@ public class TransactionController {
 
     @Transactional
     @PostMapping("/clients/current/transactions")
-    public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam Double amount, @RequestParam String description, @RequestParam String originAccount, @RequestParam String destinationAccount){
+    public ResponseEntity<String> newCard(Authentication authentication, @RequestParam Double amount, @RequestParam String description, @RequestParam String originAccount, @RequestParam String destinationAccount){
 
         Account fromAccount = accountRepository.findByNumber(originAccount);
         Account toAccount = accountRepository.findByNumber(destinationAccount);

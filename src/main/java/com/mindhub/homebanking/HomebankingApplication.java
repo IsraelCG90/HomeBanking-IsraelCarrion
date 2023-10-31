@@ -71,35 +71,35 @@ public class HomebankingApplication {
 			transactionRepository.save(israelA1T);
 
 			//LOANS
-			Loan l1 = new Loan("Mortgage", 500000.00, List.of(12, 24, 36, 48, 60));
-			loanRepository.save(l1);
+			Loan mortgage = new Loan("Mortgage", 500000.00, List.of(12, 24, 36, 48, 60));
+			loanRepository.save(mortgage);
 
-			Loan l2 = new Loan("Personal", 100000.00, List.of(6, 12, 24));
-			loanRepository.save(l2);
+			Loan personal = new Loan("Personal", 100000.00, List.of(6, 12, 24));
+			loanRepository.save(personal);
 
-			Loan l3 = new Loan("Automotive", 300000.00, List.of(6, 12, 24, 36));
-			loanRepository.save(l3);
+			Loan automotive = new Loan("Automotive", 300000.00, List.of(6, 12, 24, 36));
+			loanRepository.save(automotive);
 
 			//LOANS CLIENT-1
 			ClientLoan melbaL1 = new ClientLoan(400000.00, 60);
 			melba.addClientLoan(melbaL1);
-			l1.addClientLoan(melbaL1);
+			mortgage.addClientLoan(melbaL1);
 			clientLoanRepository.save(melbaL1);
 
 			ClientLoan melbaL2 = new ClientLoan(50000.00, 12);
 			melba.addClientLoan(melbaL2);
-			l2.addClientLoan(melbaL2);
+			personal.addClientLoan(melbaL2);
 			clientLoanRepository.save(melbaL2);
 
 			//LOANS CLIENT-2
 			ClientLoan israelL1 = new ClientLoan(100000.00, 24);
 			israel.addClientLoan(israelL1);
-			l2.addClientLoan(israelL1);
+			personal.addClientLoan(israelL1);
 			clientLoanRepository.save(israelL1);
 
 			ClientLoan israelL2 = new ClientLoan(200000.00, 36);
 			israel.addClientLoan(israelL2);
-			l3.addClientLoan(israelL2);
+			automotive.addClientLoan(israelL2);
 			clientLoanRepository.save(israelL2);
 
 			//CLIENT-1 CARD-1

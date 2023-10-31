@@ -24,8 +24,7 @@ public class WebAuthorization{
                 .antMatchers("/web/index.html", "/web/pages/login.html", "/web/pages/register.html", "/web/styles/**", "/web/scripts/**", "/web/images/**").permitAll()
                 .antMatchers("/h2-console/**", "/rest/**", "/web/pages/manager.html").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/clients").hasAuthority("ADMIN")
-                .antMatchers("/web/pages/**", "/api/clients/current/**").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/clients/current/**").authenticated()
+                .antMatchers("/web/pages/**", "/api/clients/current/**").hasAuthority("CLIENT")
                 .anyRequest().denyAll();
 
         // turn off checking for CSRF(Cross-Site Request Forgery)tokens

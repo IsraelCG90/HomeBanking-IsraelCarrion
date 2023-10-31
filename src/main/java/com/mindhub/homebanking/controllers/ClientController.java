@@ -53,25 +53,25 @@ public class ClientController {
     }
 
     @PostMapping("/clients")
-    public ResponseEntity<Object> newClient(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<String> newClient(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password) {
 
-        if (firstName.isEmpty() || firstName.isBlank()) {
+        if (firstName.isBlank()) {
             return new ResponseEntity<>("Missing First Name", HttpStatus.FORBIDDEN);
         }
 
-        if(lastName.isEmpty() || lastName.isBlank()){
+        if(lastName.isBlank()){
             return new ResponseEntity<>("Missing Last Name", HttpStatus.FORBIDDEN);
         }
 
-        if(email.isEmpty() || email.isBlank()){
+        if(email.isBlank()){
             return new ResponseEntity<>("Missing Email", HttpStatus.FORBIDDEN);
         }
 
-        if(password.isEmpty() || password.isBlank()){
+        if(password.isBlank()){
             return new ResponseEntity<>("Missing Password", HttpStatus.FORBIDDEN);
         }
 
-        if (clientRepository.findByEmail(email) != null) {
+        if (!clientRepository.existsByEmail(email)) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
 
