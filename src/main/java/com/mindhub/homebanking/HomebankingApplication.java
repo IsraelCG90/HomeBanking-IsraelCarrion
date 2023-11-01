@@ -13,8 +13,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.mindhub.homebanking.models.TransactionType.*;
-import static com.mindhub.homebanking.models.CardType.*;
 import static com.mindhub.homebanking.models.CardColor.*;
 
 @SpringBootApplication
@@ -38,11 +36,11 @@ public class HomebankingApplication {
 			accountRepository.save(melbaA1);
 
 			//TRANSACTIONS CLIENT-1 ACCOUNT-1
-			Transaction melbaA1T = new Transaction(CREDITT, 2500, "Buy a iPhone", LocalDateTime.now());
+			Transaction melbaA1T = new Transaction(TransactionType.CREDIT, 2500, "Buy a iPhone", LocalDateTime.now());
 			melbaA1.addTransaction(melbaA1T);
 			transactionRepository.save(melbaA1T);
 
-			Transaction melbaA1T2 = new Transaction(DEBITT, -500, "Buy a case", LocalDateTime.now());
+			Transaction melbaA1T2 = new Transaction(TransactionType.DEBIT, -500, "Buy a case", LocalDateTime.now());
 			melbaA1.addTransaction(melbaA1T2);
 			transactionRepository.save(melbaA1T2);
 
@@ -52,7 +50,7 @@ public class HomebankingApplication {
 			accountRepository.save(melbaA2);
 
 			//TRANSACTION CLIENT-1 ACCOUNT-2
-			Transaction melbaA2T = new Transaction(DEBITT, -350, "Tax payment", LocalDateTime.now());
+			Transaction melbaA2T = new Transaction(TransactionType.DEBIT, -350, "Tax payment", LocalDateTime.now());
 			melbaA2.addTransaction(melbaA2T);
 			transactionRepository.save(melbaA2T);
 
@@ -66,7 +64,7 @@ public class HomebankingApplication {
 			accountRepository.save(israelA1);
 
 			//TRANSACTION CLIENT-2 ACCOUNT-1
-			Transaction israelA1T = new Transaction(CREDITT, 5000, "Buy Mac", LocalDateTime.now());
+			Transaction israelA1T = new Transaction(TransactionType.CREDIT, 5000, "Buy Mac", LocalDateTime.now());
 			israelA1.addTransaction(israelA1T);
 			transactionRepository.save(israelA1T);
 
@@ -103,17 +101,17 @@ public class HomebankingApplication {
 			clientLoanRepository.save(israelL2);
 
 			//CLIENT-1 CARD-1
-			Card melbaC1 = new Card(melba.nameCard(), DEBIT, GOLD, "4055-1600-1739-7609", "185", LocalDate.now(), LocalDate.now().plusYears(5));
+			Card melbaC1 = new Card(melba.nameCard(), CardType.DEBIT, GOLD, "4055-1600-1739-7609", "185", LocalDate.now(), LocalDate.now().plusYears(5));
 			melba.addCard(melbaC1);
 			cardRepository.save(melbaC1);
 
 			//CLIENT-1 CARD-2
-			Card melbaC2 = new Card(melba.nameCard(), CREDIT, TITANIUM, "4055-1600-1739-3300", "963", LocalDate.now(), LocalDate.now().plusYears(5));
+			Card melbaC2 = new Card(melba.nameCard(), CardType.CREDIT, TITANIUM, "4055-1600-1739-3300", "963", LocalDate.now(), LocalDate.now().plusYears(5));
 			melba.addCard(melbaC2);
 			cardRepository.save(melbaC2);
 
 			//CLIENT-2 CARD-1
-			Card israelC1 = new Card(israel.nameCard(), CREDIT, SILVER, "4111-9729-7856-5783", "663", LocalDate.now(), LocalDate.now().plusYears(5));
+			Card israelC1 = new Card(israel.nameCard(), CardType.CREDIT, SILVER, "4111-9729-7856-5783", "663", LocalDate.now(), LocalDate.now().plusYears(5));
 			israel.addCard(israelC1);
 			cardRepository.save(israelC1);
 

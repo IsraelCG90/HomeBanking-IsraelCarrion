@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static com.mindhub.homebanking.models.TransactionType.*;
@@ -31,7 +30,7 @@ public class TransactionController {
 
     @Transactional
     @PostMapping("/clients/current/transactions")
-    public ResponseEntity<String> newCard(Authentication authentication, @RequestParam Double amount, @RequestParam String description, @RequestParam String originAccount, @RequestParam String destinationAccount){
+    public ResponseEntity<String> newTransaction(Authentication authentication, @RequestParam Double amount, @RequestParam String description, @RequestParam String originAccount, @RequestParam String destinationAccount){
 
         Account fromAccount = accountRepository.findByNumber(originAccount);
         Account toAccount = accountRepository.findByNumber(destinationAccount);
@@ -61,13 +60,13 @@ public class TransactionController {
             return new ResponseEntity<>("You do not have sufficient funds to make the transfer.", HttpStatus.FORBIDDEN);
         }
 
-        Transaction fromTransaction = new Transaction(DEBITT, -amount, description + " to " + destinationAccount, LocalDateTime.now());
+        Transaction fromTransaction = new Transaction(DEBIT, -amount, description + " to " + destinationAccount, LocalDateTime.now());
         fromAccount.addTransaction(fromTransaction);
         fromAccount.setBalance(fromAccount.getBalance() - amount);
         transactionRepository.save(fromTransaction);
 
 
-        Transaction toTransaction = new Transaction(CREDITT, amount, description + " from " + originAccount, LocalDateTime.now());
+        Transaction toTransaction = new Transaction(CREDIT, amount, description + " from " + originAccount, LocalDateTime.now());
         toAccount.addTransaction(toTransaction);
         toAccount.setBalance(toAccount.getBalance() + amount);
         transactionRepository.save(toTransaction);
