@@ -44,7 +44,9 @@
             </nav>
         </header>
         <main>
-            <h1 class="m-4 text-center welcome">Welcome {{name}}!</h1>
+            <div class="title">
+                <h1>Welcome {{name}}!</h1>
+            </div>
             <div class="d-flex justify-content-center flex-wrap gap-4">
                 <div v-for="account of accounts" data-aos="flip-left" class="card cardAcount align-items-center" style="width: 18rem;">
                     <div class="card-body">
@@ -71,7 +73,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center pt-4">
-                <a type="button" class="aAcounts" @click="createAccount" v-if="accounts.length < 3">Create New Account <i class="bi bi-chevron-right"></i></a>
+                <button type="button" class="btn" @click="createAccount" v-if="accounts.length < 3">Create New Account <i class="bi bi-chevron-right"></i></button>
             </div>
             <div class="mt-5 d-flex flex-column align-items-center">
                 <h3 class="welcome mb-3">Acquired Loans</h3>
@@ -86,7 +88,7 @@
                     <tbody>
                         <tr class="rowBorder" v-for="loan of loans">
                             <td>{{ loan.name }}</td>
-                            <td>{{ loan.amount }}</td>
+                            <td>${{ loan.amount }}</td>
                             <td class="text-center">{{ loan.payments }}</td>
                         </tr>
                     </tbody>

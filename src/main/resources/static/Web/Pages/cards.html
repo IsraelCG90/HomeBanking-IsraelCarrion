@@ -46,54 +46,138 @@
             <div class="d-flex flex-column align-items-center pb-5">
                 <h2 class="mt-4">Credit Cards</h2>
                 <div class="d-flex justify-content-center flex-wrap gap-4">
-                    <div v-if="credit.length != 0" v-for="card of credit" class="card d-flex align-items-center">
-                        <span class="info">CVV: {{card.cvv}}</span>
-                        <div class="d-flex justify-content-between w-100 mt-2 ms-1">
-                            <img src="../images/logoCard.png" class="cardLogo"></img>
-                            <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
+                    <div v-for="card of credit"> 
+                        <div  v-if="credit.length != 0 && card.color == 'GOLD'" class="card d-flex align-items-center cardGold">
+                            <span class="info">CVV: {{card.cvv}}</span>
+                            <div class="d-flex justify-content-between w-100 mt-2 ms-1">
+                                <img src="../images/logoCard.png" class="cardLogo"></img>
+                                <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
+                            </div>
+                            <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
+                                <img src="../images/chip.png" class="chip" alt="chip">
+                                <span class="colorCard ">{{card.color}}</span>
+                            </div>
+                          <p class="m-0 p-0 cardNumber mb-1">{{card.number}}</p>
+                          <div class="d-flex justify-content-around w-100">
+                            <p class="m-0 pData" >Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
+                            <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between w-100 ">
+                            <p class="cardName ms-4 pt-2">{{card.cardHolder}} <p>
+                            <img src="../images/visa2.png" class="visa me-4" alt="visa">
+                          </div>
                         </div>
-                        <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
-                            <img src="../images/chip.png" class="chip" alt="chip">
-                            <span class="colorCard ">{{card.color}}</span>
+                        <div  v-else-if="credit.length != 0 && card.color == 'TITANIUM'" class="card d-flex align-items-center cardTitanium">
+                            <span class="info">CVV: {{card.cvv}}</span>
+                            <div class="d-flex justify-content-between w-100 mt-2 ms-1">
+                                <img src="../images/logoCard.png" class="cardLogo"></img>
+                                <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
+                            </div>
+                            <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
+                                <img src="../images/chip.png" class="chip" alt="chip">
+                                <span class="colorCard ">{{card.color}}</span>
+                            </div>
+                          <p class="m-0 p-0 cardNumber mb-1">{{card.number}}</p>
+                          <div class="d-flex justify-content-around w-100">
+                            <p class="m-0 pData" >Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
+                            <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between w-100 ">
+                            <p class="cardName ms-4 pt-2">{{card.cardHolder}} <p>
+                            <img src="../images/visa2.png" class="visa me-4" alt="visa">
+                          </div>
                         </div>
-                      <p class="m-0 p-0 cardNumber mb-1">{{card.number}}</p>
-                      <div class="d-flex justify-content-around w-100">
-                        <p class="m-0 pData" >Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
-                        <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between w-100 ">
-                        <p class="cardName ms-4 pt-2">{{card.cardHolder}} <p>
-                        <img src="../images/visa2.png" class="visa me-4" alt="visa">
-                      </div>
+                        <div  v-else-if="credit.length != 0 && card.color == 'SILVER'" class="card d-flex align-items-center cardSilver">
+                            <span class="info">CVV: {{card.cvv}}</span>
+                            <div class="d-flex justify-content-between w-100 mt-2 ms-1">
+                                <img src="../images/logoCard.png" class="cardLogo"></img>
+                                <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
+                            </div>
+                            <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
+                                <img src="../images/chip.png" class="chip" alt="chip">
+                                <span class="colorCard ">{{card.color}}</span>
+                            </div>
+                          <p class="m-0 p-0 cardNumber mb-1">{{card.number}}</p>
+                          <div class="d-flex justify-content-around w-100">
+                            <p class="m-0 pData" >Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
+                            <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between w-100 ">
+                            <p class="cardName ms-4 pt-2">{{card.cardHolder}} <p>
+                            <img src="../images/visa2.png" class="visa me-4" alt="visa">
+                          </div>
+                        </div>
+                        <h6 v-else>You don't have credit cards.</h6>
                     </div>
-                    <h6 v-else>You don't have credit cards.</h6>
                 </div>
                 <h2 class="mt-5">Debit Cards</h2>
                 <div class="d-flex justify-content-center flex-wrap gap-4" >
-                    <div v-if="debit.length != 0" v-for="card of debit" class="card d-flex align-items-center">
-                        <span class="info">CVV: {{card.cvv}}</span>
-                        <div class="d-flex justify-content-between w-100 mt-2 ms-1">
-                            <img src="../images/logoCard.png" class="cardLogo"></img>
-                            <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
+                    <div v-for="card of debit"> 
+                        <div  v-if="credit.length != 0 && card.color == 'GOLD'" class="card d-flex align-items-center cardGold">
+                            <span class="info">CVV: {{card.cvv}}</span>
+                            <div class="d-flex justify-content-between w-100 mt-2 ms-1">
+                                <img src="../images/logoCard.png" class="cardLogo"></img>
+                                <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
+                            </div>
+                            <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
+                                <img src="../images/chip.png" class="chip" alt="chip">
+                                <span class="colorCard ">{{card.color}}</span>
+                            </div>
+                          <p class="m-0 p-0 cardNumber mb-1">{{card.number}}</p>
+                          <div class="d-flex justify-content-around w-100">
+                            <p class="m-0 pData" >Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
+                            <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between w-100 ">
+                            <p class="cardName ms-4 pt-2">{{card.cardHolder}} <p>
+                            <img src="../images/visa2.png" class="visa me-4" alt="visa">
+                          </div>
                         </div>
-                        <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
-                            <img src="../images/chip.png" class="chip" alt="chip">
-                            <span class="colorCard ">{{card.color}}</span>
+                        <div  v-else-if="credit.length != 0 && card.color == 'TITANIUM'" class="card d-flex align-items-center cardTitanium">
+                            <span class="info">CVV: {{card.cvv}}</span>
+                            <div class="d-flex justify-content-between w-100 mt-2 ms-1">
+                                <img src="../images/logoCard.png" class="cardLogo"></img>
+                                <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
+                            </div>
+                            <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
+                                <img src="../images/chip.png" class="chip" alt="chip">
+                                <span class="colorCard ">{{card.color}}</span>
+                            </div>
+                          <p class="m-0 p-0 cardNumber mb-1">{{card.number}}</p>
+                          <div class="d-flex justify-content-around w-100">
+                            <p class="m-0 pData" >Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
+                            <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between w-100 ">
+                            <p class="cardName ms-4 pt-2">{{card.cardHolder}} <p>
+                            <img src="../images/visa2.png" class="visa me-4" alt="visa">
+                          </div>
                         </div>
-                      <p class="m-0 p-0 cardNumber mb-1">{{card.number}}</p>
-                      <div class="d-flex justify-content-around w-100">
-                        <p class="m-0 pData" >Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
-                        <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between w-100 ">
-                        <p class="cardName ms-4 pt-2">{{card.cardHolder}}<p>
-                        <img src="../images/visa2.png" class="visa me-4" alt="visa">
-                      </div>
+                        <div  v-else-if="credit.length != 0 && card.color == 'SILVER'" class="card d-flex align-items-center cardSilver">
+                            <span class="info">CVV: {{card.cvv}}</span>
+                            <div class="d-flex justify-content-between w-100 mt-2 ms-1">
+                                <img src="../images/logoCard.png" class="cardLogo"></img>
+                                <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
+                            </div>
+                            <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
+                                <img src="../images/chip.png" class="chip" alt="chip">
+                                <span class="colorCard ">{{card.color}}</span>
+                            </div>
+                          <p class="m-0 p-0 cardNumber mb-1">{{card.number}}</p>
+                          <div class="d-flex justify-content-around w-100">
+                            <p class="m-0 pData" >Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
+                            <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between w-100 ">
+                            <p class="cardName ms-4 pt-2">{{card.cardHolder}} <p>
+                            <img src="../images/visa2.png" class="visa me-4" alt="visa">
+                          </div>
+                        </div>
+                        <h6 v-else>You don't have debit cards.</h6>
                     </div>
-                    <h6 v-else>You don't have credit cards.</h6>
                 </div>
                 <div class="d-flex justify-content-center pt-5" v-if="debit.length < 3 || credit.length < 3">
-                    <a type="button" href="./create-cards.html" class="aAcounts">Request a New Card<i class="bi bi-chevron-right"></i></a>
+                    <button type="button" @click="createCard" class="btn">Request a New Card<i class="bi bi-chevron-right"></i></button>
                 </div>
             </div>
         </main>

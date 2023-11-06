@@ -64,3 +64,81 @@ span{
         font-size: 1rem;
     }
 }
+
+/*Boton*/
+.btn {
+    transition: all 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+}
+  
+.btn {
+    width: 16rem;
+    height: 3rem;
+    border-radius: 50px;
+    background-image: linear-gradient(135deg, #feb692 0%, #ea5455 100%);
+    box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 1.2rem;
+    color: white;
+}
+  
+.btn:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+    color: white;
+}
+  
+.btn:active {
+    opacity: 0.5;
+}
+
+/*Titulo de bienvenida*/
+@import url('https://fonts.googleapis.com/css?family=Cairo');
+
+
+.title {
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	text-align: center;
+	color: #FFF;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	letter-spacing: 1px;
+	line-height:2;
+    padding: 1rem 0rem;
+}
+
+h1 {
+	background-image: url(https://media1.giphy.com/media/37oQNyNrbumM8wZtEg/giphy.gif?cid=ecf05e47kotjtoo106y2cbiqe4ufaqjwhiai3rj76ou8lqud&ep=v1_gifs_search&rid=giphy.gif&ct=g);
+	/* background-size: cover; */
+	color: transparent;
+	-moz-background-clip: text;
+	-webkit-background-clip: text;
+	text-transform: uppercase;
+	font-size: 2.5rem;
+	margin: 10px 0;
+    background-position: center;
+}
+
+/* styling my button */
+
+.white-mode {
+	text-decoration: none;
+	padding: 7px 10px;
+	background-color: #122;
+	border-radius: 3px;
+	color: #FFF;
+	transition: .35s ease-in-out;
+	position: absolute;
+	left: 15px;
+	bottom: 15px;
+	font-family: "Montserrat";
+}
+
+.white-mode:hover {
+	background-color: #FFF;
+	color: #122;
+}

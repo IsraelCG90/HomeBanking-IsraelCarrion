@@ -52,35 +52,26 @@
                 <div class="rightside mt-3">
                     <form class="d-flex flex-column">
                         <div class="d-flex flex-column align-items-center w-100">
-                            <h2>Make a transaction</h2>
-                            <div class="form d-flex gap-3 justify-content-center">
-                                <div class="d-flex gap-3">
-                                    <label class="form-check-label" for="my"> My accounts </label>
-                                    <input class="form-check-input" type="radio" value="myAccounts" v-model="toOrFrom" id="my" >
-                                </div>
-                                <div class="d-flex gap-3">
-                                    <label class="form-check-label" for="others"> Others </label>
-                                    <input class="form-check-input" type="radio" value="Others" v-model="toOrFrom" id="others">
+                            <h2>Complete the form</h2>
+                            <div class="form d-flex gap-3 justify-content-center w-100">
+                                <div class="d-flex gap-3" v-for="loan of loans">
+                                    <label class="form-check-label" for="my"> {{loan.name}} </label>
+                                    <input class="form-check-input" type="radio" :value="loan.id" v-model="loanSelected" id="my" >
                                 </div>
                             </div>
                         </div>
-                        <p class="mt-4">From Account</p>
-                        <select class="inputbox" name="card_type" id="card_type" v-model="mySelectAccount" required>
-                            <option v-for="account in fromAccounts" v-bind:value="account" @click="filterAccounts">{{account}}</option>
+                        <p class="mt-4">Payments</p>
+                        <select class="inputbox" name="card_type" id="card_type" v-model="paymentSelected" required>
+                            <option v-for="payment in payments" :value="payment">{{payment}}</option>
                         </select>
-                        <p>To Account</p>
-                        <select v-if="toOrFrom == 'myAccounts'" class="inputbox" name="card_type" id="card_type" v-model="toAccount" required>
-                            <option v-for="account of toMyAccounts" v-bind:value="account">{{account}}</option>
-                        </select>
-                        <input v-else type="text" class="inputbox" name="name" v-model="toAccount" required />
                         <p>Amount</p>
                         <input type="number" class="inputbox" name="card_number" id="card_number" v-model="amount" required />
-                        <div class="expcvv">
-                            <p class="expcvv_text2">Description</p>
-                            <input type="text" class="inputbox" name="cvv" id="cvv" v-model="description" required />
-                        </div>
-                        <p></p>
-                        <button type="button" class="button" @click="transfer">Transfer</button>
+                        <p>Select your account</p>
+                        <select class="inputbox" name="card_type" id="card_type" v-model="accountSelected" required>
+                            <option v-for="account in yourAccounts" :value="account">{{account}}</option>
+                        </select>
+                        
+                        <button type="button" class="button" @click="requestLoan">Request Your Loan</button>
                     </form>
                 </div>
             </div>

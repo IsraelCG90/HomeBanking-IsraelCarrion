@@ -42,6 +42,54 @@ main{
     border-radius: 0.3rem;
 }
 
+.loginIndex{
+    height: 3rem !important;
+    font-size: 2rem;
+
+}
+
+.containerIcons{
+    width: 95%;
+    font-size: 1.2rem;
+    padding: 2rem 0rem;
+    gap: 2rem;
+}
+
+.aIcons{
+    color: #e74c67;
+}
+
+.i{
+    color: #e74c67;
+}
+
+.ancho{
+    width: 17rem;
+    gap: 2rem;
+}
+
+.containerLast{
+    width: 90%;
+    align-items: center;
+    padding: 3rem 0rem;
+}
+
+div h4{
+    font-size: 2rem;
+    text-align: center;
+    color: rgb(90, 89, 89);
+}
+
+.bi-geo-alt{
+    font-size: 3rem;
+    color: #e74c67;
+}
+
+.aHelp{
+    color: #e74c67;
+    font-size: 1.5rem;
+}
+
 @media (min-width: 768px) { 
     .card{
         width: 80%;
@@ -53,4 +101,23 @@ main{
         width: 20rem;
     }
 
+    .containerIcons{
+        flex-direction: row !important;
+        gap: 5%;
+    }
+
+    .ancho{
+        flex-direction: column;
+        width: 8rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .i{
+        font-size: 3rem;
+    }
+
+    div h4{
+        font-size: 3rem;
+    }
 }

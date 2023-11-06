@@ -29,6 +29,9 @@ createApp({
       .then( response => {
         location.pathname="/web/index.html"
       })
+    },
+    createCard(){
+      location.pathname="/web/pages/create-cards.html"
     }
   },
 }).mount("#app");

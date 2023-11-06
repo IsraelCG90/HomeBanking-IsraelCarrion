@@ -73,13 +73,13 @@
                             <tr class="headerRow">
                                 <th>TYPE</th>
                                 <th>AMOUNT</th>
-                                <th>DATA</th>
+                                <th>DATE</th>
                                 <th>DESCRIPTION</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="rowBorder" v-for="transaction of account.transactions">
-                                <td v-if="transaction.type == 'DEBITT'" class="debit">{{ transaction.type }}</td>
+                                <td v-if="transaction.type == 'DEBIT'" class="debit">{{ transaction.type }}</td>
                                 <td v-else class="credit">{{ transaction.type }}</td>
                                 <td>{{ transaction.amount }}</td>
                                 <td> {{ dateFormat(transaction.date) }}</td>

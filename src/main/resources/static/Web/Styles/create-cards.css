@@ -12,17 +12,15 @@ h4{
     color: rgb(99, 97, 97);
 }
   
-.card{
-    background-color: rgb(255, 255, 255);
-}
+
 
 .form {
-    --background: rgba(255, 255, 255, 0.753);
+    --background: #fcbc8118;
     --text: #080808;
-    --radio: #ce75af;
-    --radio-checked: #fb9e42;
+    --radio: #9b0867;
+    --radio-checked: #f18c26;
     --radio-size: 23px;
-    --width: 150px;
+    --width: 15rem;
     --height: 150px;
     --border-radius: 10px;
     background: var(--background);
@@ -109,6 +107,30 @@ h4{
     transition: opacity 0s linear .5s;
 }
   
+.bi-box-arrow-left{
+    color: black !important;
+}
+
+.imgCard{
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.divCard{
+    width: 15rem;
+}
+
+.cotainerGeneral{
+    justify-content: space-around;
+}
+
+.pCard{
+    font-weight: 600;
+    color: #504e4e;
+}
+
 @keyframes stretch-animate {
     0% {
       transform: scale(1, 1);
@@ -125,6 +147,7 @@ h4{
     100% {
       transform: scale(1, 1);
     }
+    
 }
   
 .socials {
@@ -146,3 +169,72 @@ h4{
     --scale: 1;
 }
   
+/*Boton*/
+.btn {
+    transition: all 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+}
+  
+.btn {
+    width: 16rem;
+    height: 3rem;
+    border-radius: 50px;
+    background-image: linear-gradient(135deg, #feb692 0%, #ea5455 100%);
+    box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 1.3rem;
+    color: white;
+}
+  
+.btn:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+    color: white;
+}
+  
+.btn:active {
+    opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+    .imgCard{
+        width: 20rem;
+        height: 12rem;
+    }
+
+    .pCard{
+        font-size: 1.5rem;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .imgCard{
+        width: 23rem;
+        height: 15rem;
+        margin-top: 0 !important;
+    }
+
+    .containerTwo{
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .divCard{
+        width: 30rem;
+        margin-top: 0 !important;
+        height: 15rem;
+    }
+
+    .containerForm{
+        padding-left: 1rem;
+    }
+}
+
+@media (min-width: 1200px){
+    .imgCard{
+        width: 26rem;
+    }
+}

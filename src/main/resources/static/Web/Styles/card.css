@@ -6,23 +6,30 @@ h2 {
     color: rgb(104, 102, 102);
 }
 
-.card {
+.cardGold {
     width: 19rem;
     height: 11.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    background-image: linear-gradient(145deg,
-            hsl(295, 55%, 37%) 27%,
-            hsl(320, 69%, 39%) 54%,
-            hsl(338deg 66% 50%) 64%,
-            hsl(357deg 80% 62%) 70%,
-            hsl(15deg 93% 63%) 74%,
-            hsl(30deg 96% 62%) 78%,
-            hsl(26deg 73% 54%) 81%,
-            hsl(22deg 66% 46%) 85%,
-            hsl(17deg 70% 38%) 90%,
-            hsl(11deg 76% 30%) 94%,
-            hsl(0deg 91% 22%) 100%);
+    background: rgb(137,42,146);
+background: linear-gradient(156deg, rgba(137,42,146,1) 38%, rgba(207,181,59,1) 87%);
 }
+
+.cardTitanium {
+    width: 19rem;
+    height: 11.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background: rgb(137,42,146);
+    background: linear-gradient(156deg, rgba(137,42,146,1) 38%, rgba(135,134,129,1) 87%);
+}
+
+.cardSilver {
+    width: 19rem;
+    height: 11.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background: rgb(137,42,146);
+background: linear-gradient(156deg, rgba(137,42,146,1) 38%, rgba(192,192,192,1) 87%);
+}
+
 
 .info {
     position: absolute;
@@ -68,7 +75,7 @@ h2 {
 }
 
 .pData {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
     color: white;
     font-weight: 600;
 }
@@ -92,12 +99,35 @@ span {
     filter: invert(1);
 }
 
-.aAcounts{
-    text-decoration: none;
-    color: #e74c67;
-    font-size: 1.1rem;
-}
-
 .goOut{
     color: black;
+}
+
+/*Boton*/
+.btn {
+    transition: all 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+}
+  
+.btn {
+    width: 16rem;
+    height: 3rem;
+    border-radius: 50px;
+    background-image: linear-gradient(135deg, #feb692 0%, #ea5455 100%);
+    box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 1.3rem;
+    color: white;
+}
+  
+.btn:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+    color: white;
+}
+  
+.btn:active {
+    opacity: 0.5;
 }
