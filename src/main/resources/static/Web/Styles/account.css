@@ -78,7 +78,7 @@ td, th{
 
 @media (min-width: 768px) { 
     .accountDetail{
-        width: 60%;
+        width: 70%;
         font-size: 1rem;
     }
     td, th{

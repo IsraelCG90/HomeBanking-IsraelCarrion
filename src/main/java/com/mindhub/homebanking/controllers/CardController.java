@@ -4,8 +4,8 @@ import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.CardColor;
 import com.mindhub.homebanking.models.CardType;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.repositories.CardRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.implement.CardServiceImpl;
+import com.mindhub.homebanking.services.implement.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +21,15 @@ import java.time.LocalDate;
 @RequestMapping("/api")
 public class CardController {
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientServiceImpl clientService;
     @Autowired
-    private CardRepository cardRepository;
+    private CardServiceImpl cardService;
 
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
-     public String generateNumberCard() {
+    public String generateNumberCard() {
         StringBuilder cardNumber;
         do {
             cardNumber = new StringBuilder();
@@ -37,7 +37,7 @@ public class CardController {
                 cardNumber.append(getRandomNumber(0, 9));
                 if ((i + 1) % 4 == 0 && i != 15) cardNumber.append("-");
             }
-        } while (cardRepository.existsByNumber(cardNumber.toString()));
+        } while (cardService.existsCardByNumber(cardNumber.toString()));
         return cardNumber.toString();
     }
 
@@ -61,7 +61,7 @@ public class CardController {
             return new ResponseEntity<>("Missing Card Color", HttpStatus.FORBIDDEN);
         }
 
-        Client client = clientRepository.findByEmail(authentication.getName());
+        Client client = clientService.findClientByEmail(authentication.getName());
 
         int numberOfCardType = (int) client.getCards().stream().filter(card -> card.getType().equals(CardType.valueOf(cardType))).count();
 
@@ -71,8 +71,8 @@ public class CardController {
 
         Card card = new Card(client.nameCard(), CardType.valueOf(cardType), CardColor.valueOf(cardColor), generateNumberCard(), generateCvvCard(), LocalDate.now().plusYears(5), LocalDate.now());
         client.addCard(card);
-        cardRepository.save(card);
-        clientRepository.save(client);
+        cardService.saveCard(card);
+        clientService.saveClient(client);
 
         return new ResponseEntity<>("Card created successfully", HttpStatus.CREATED);
     }

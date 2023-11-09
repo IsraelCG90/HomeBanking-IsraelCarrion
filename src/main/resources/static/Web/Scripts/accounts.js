@@ -17,10 +17,9 @@ createApp({
     loadData(){
         axios.get('/api/clients/current')
         .then( ({data}) => {
-            this.accounts = data.accounts;
+            this.accounts = data.accounts.sort((a, b) => b.id - a.id);
             this.name = data.firstName;
-            this.loans = data.loans;
-            this.accounts.sort((a, b) => b.id - a.id);
+            this.loans = data.loans.sort((a, b) => b.id - a.id);
         })
         .catch(err => console.log(err))
     },

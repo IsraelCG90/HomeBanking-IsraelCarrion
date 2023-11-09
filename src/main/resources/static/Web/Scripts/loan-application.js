@@ -4,8 +4,8 @@ createApp({
   data() {
     return {
       loans: [],
-      loanSelected: "",
-      payments: [],
+      loanSelected: 0,
+      paymentsLoans: [],
       paymentSelected: 0,
       yourAccounts: [],
       accountSelected: "",
@@ -18,11 +18,16 @@ createApp({
     this.loadData();
   },
 
+  watch: {
+    loanSelected(idLoan) {
+      this.paymentsLoans = this.loans.find((loan) => loan.id == idLoan);
+    },
+  },
+
   methods: {
     getLoans() {
       axios.get('/api/loan')
         .then(({ data }) => {
-          console.log(data)
           this.loans = data.sort((a, b) => b.id - a.id);
         })
         .catch(err => console.log(err))
@@ -48,11 +53,12 @@ createApp({
         })
     }
   },
-  computed: {
-    updatePayments() {
-      this.payments = this.loans.find(l => l.id == this.loanSelected).payments;
-      console.log(this.payments)
-    }
-  }
+
+  // computed: {
+  //   updatePayments() {
+  //     this.paymentsLoans = this.loans.find(l => l.id == this.loanSelected);
+  //     console.log(this.paymentsLoans)
+  //   }
+  // },
 
 }).mount("#app");

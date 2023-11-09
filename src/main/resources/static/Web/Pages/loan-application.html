@@ -56,18 +56,18 @@
                             <div class="form d-flex gap-3 justify-content-center w-100">
                                 <div class="d-flex gap-3" v-for="loan of loans">
                                     <label class="form-check-label" for="my"> {{loan.name}} </label>
-                                    <input class="form-check-input" type="radio" :value="loan.id" v-model="loanSelected" id="my" >
+                                    <input class="form-check-input" type="radio" :value="loan.id" v-model="loanSelected" id="my">
                                 </div>
                             </div>
                         </div>
                         <p class="mt-4">Payments</p>
-                        <select class="inputbox" name="card_type" id="card_type" v-model="paymentSelected" required>
-                            <option v-for="payment in payments" :value="payment">{{payment}}</option>
+                        <select class="inputbox" name="card_type" id="card_type" v-model="paymentSelected">
+                            <option v-for="payment in paymentsLoans.payments" :value="payment">{{payment}}</option>
                         </select>
                         <p>Amount</p>
-                        <input type="number" class="inputbox" name="card_number" id="card_number" v-model="amount" required />
+                        <input type="number" class="inputbox" name="card_number" id="card_number" v-model="amount" />
                         <p>Select your account</p>
-                        <select class="inputbox" name="card_type" id="card_type" v-model="accountSelected" required>
+                        <select class="inputbox" name="card_type" id="card_type" v-model="accountSelected">
                             <option v-for="account in yourAccounts" :value="account">{{account}}</option>
                         </select>
                         
@@ -93,8 +93,8 @@
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="../scripts/loan-application.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <script src="../scripts/loan-application.js"></script>
 </body>
 
 </html>
