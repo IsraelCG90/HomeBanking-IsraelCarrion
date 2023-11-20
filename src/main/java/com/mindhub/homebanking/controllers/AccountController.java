@@ -4,9 +4,9 @@ import com.mindhub.homebanking.dto.AccountDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.services.implement.AccountServiceImpl;
-import com.mindhub.homebanking.services.implement.ClientServiceImpl;
-import com.mindhub.homebanking.services.implement.TransactionServiceImpl;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +23,13 @@ import static com.mindhub.homebanking.utils.AccountUtils.accountNumber;
 @RequestMapping("/api")
 public class AccountController {
     @Autowired
-    private AccountServiceImpl accountService;
+    private AccountService accountService;
 
     @Autowired
-    private ClientServiceImpl clientService;
+    private ClientService clientService;
 
     @Autowired
-    private TransactionServiceImpl transactionService;
+    private TransactionService transactionService;
 
     @GetMapping("/accounts")
     public Set<AccountDTO> getAccounts(){

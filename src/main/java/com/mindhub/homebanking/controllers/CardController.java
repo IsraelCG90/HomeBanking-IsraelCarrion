@@ -28,17 +28,17 @@ public class CardController {
     @PostMapping("/clients/current/cards")
     public ResponseEntity<String> newCard(Authentication authentication, @RequestParam String cardType, @RequestParam String cardColor){
 
-        if (cardType.isBlank() || !cardType.equals("DEBIT") && !cardType.equals("CREDIT")) {
+        if (!cardType.equals("DEBIT") && !cardType.equals("CREDIT")) {
             return new ResponseEntity<>("Missing Card Type", HttpStatus.FORBIDDEN);
         }
 
-        if(cardColor.isBlank() || !cardColor.equals("GOLD") && !cardColor.equals("TITANIUM") && !cardColor.equals("SILVER")){
+        if(!cardColor.equals("GOLD") && !cardColor.equals("TITANIUM") && !cardColor.equals("SILVER")){
             return new ResponseEntity<>("Missing Card Color", HttpStatus.FORBIDDEN);
         }
 
         Client client = clientService.findClientByEmail(authentication.getName());
 
-        int numberOfCardType = (int) client.getCards().stream().filter(card -> card.getType().equals(CardType.valueOf(cardType))).count();
+        //int numberOfCardType = (int) client.getCards().stream().filter(card -> card.getType().equals(CardType.valueOf(cardType))).count();
 
         if (cardService.existsByClientAndTypeAndColorAndIsDeleted(client, CardType.valueOf(cardType), CardColor.valueOf(cardColor), false)) {
             return new ResponseEntity<>("You cannot apply for a card of the same type.", HttpStatus.FORBIDDEN);

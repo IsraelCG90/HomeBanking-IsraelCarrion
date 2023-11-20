@@ -57,7 +57,7 @@ public class ClientController {
             return new ResponseEntity<>("Missing Password", HttpStatus.FORBIDDEN);
         }
 
-        if (!clientService.existsClientByEmail(email)) {
+        if (clientService.existsClientByEmail(email)) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
 
