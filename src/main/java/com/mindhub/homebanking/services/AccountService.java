@@ -24,5 +24,12 @@ public interface AccountService {
     Account findAccountByNumber(String email);
 
     Set<Account> findAccountsByClient(Client client);
+
     Set<AccountDTO> findAccountsDtoByClient(Client client);
+
+    boolean balanceLessThanEqualZero(Long id, Double balance);
+
+    void deleteAccount(Long id);
+
+    int countByClientAndDelete(Client client);
 }

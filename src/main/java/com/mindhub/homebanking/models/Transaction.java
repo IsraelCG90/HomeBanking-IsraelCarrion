@@ -17,6 +17,8 @@ public class Transaction {
     private double amount;
     private String description;
     private LocalDateTime date;
+    private Double balance;
+    private Boolean isDelete = false;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="account_id")
     private Account account;
@@ -24,11 +26,12 @@ public class Transaction {
     //CONSTRUCTORS
     public Transaction() {
     }
-    public Transaction(TransactionType type, double amount, String description, LocalDateTime date) {
+    public Transaction(TransactionType type, double amount, String description, LocalDateTime date, Double balance) {
         this.type = type;
         this.amount = amount;
         this.description = description;
         this.date = date;
+        this.balance = balance;
     }
 
     //GETTERS & SETTERS
@@ -64,6 +67,22 @@ public class Transaction {
         this.date = date;
     }
 
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
     //GETTER ID
     public Long getId() {
         return id;
@@ -76,17 +95,5 @@ public class Transaction {
 
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id=" + id +
-                ", type=" + type +
-                ", amount=" + amount +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                ", account=" + account +
-                '}';
     }
 }

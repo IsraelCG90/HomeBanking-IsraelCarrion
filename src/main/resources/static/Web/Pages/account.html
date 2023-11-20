@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/account.css">
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
@@ -53,7 +54,7 @@
                         <div class="d-flex align-items-center gap-5 justify-content-md-between containerAmount">
                             <div class="d-flex flex-column align-items-center ">
                                 <img src="../images/amount.png" alt="amount" class="amount">
-                                <span>Amount</span>
+                                <span>Balance</span>
                             </div>
                             <p class="card-text"> $ {{account.balance}}</p>
                         </div>
@@ -73,6 +74,7 @@
                             <tr class="headerRow">
                                 <th>TYPE</th>
                                 <th>AMOUNT</th>
+                                <th>BALANCE</th>
                                 <th>DATE</th>
                                 <th>DESCRIPTION</th>
                             </tr>
@@ -82,6 +84,7 @@
                                 <td v-if="transaction.type == 'DEBIT'" class="debit">{{ transaction.type }}</td>
                                 <td v-else class="credit">{{ transaction.type }}</td>
                                 <td>{{ transaction.amount }}</td>
+                                <td>{{ transaction.balance }}</td>
                                 <td> {{ dateFormat(transaction.date) }}</td>
                                 <td>{{ transaction.description }}</td> 
                             </tr>
@@ -97,8 +100,9 @@
                 <a class="redes"><i class="bi bi-instagram"></i></a>
                 <a class="redes"><i class="bi bi-twitter-x"></i></a>
             </div>
-            <div>
-                <p class="p m-0">&copy;2023 Bank Nostrum</p>
+            <div class="d-flex align-items-center justify-content-center gap-2">
+                <p class="p m-0">&copy;2023 Bank Nostrum -</p>
+                <a href="../pages/manager.html" class="redes2"><i class="bi bi-file-earmark-lock2"></i></a>               
             </div>
         </footer>
     </div>
@@ -106,6 +110,7 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/JavaScript" src="https://MomentJS.com/downloads/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
     <script src="../scripts/account.js"></script>
 </body>
 </html>

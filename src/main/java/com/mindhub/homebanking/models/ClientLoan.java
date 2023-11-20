@@ -13,6 +13,7 @@ public class ClientLoan {
 
     private Double amount;
     private Integer payments;
+    private Integer paymentsMade = 0;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -50,6 +51,14 @@ public class ClientLoan {
 
     public void setPayments(Integer payments) {
         this.payments = payments;
+    }
+
+    public Integer getPaymentsMade() {
+        return paymentsMade;
+    }
+
+    public void setPaymentsMade(Integer paymentsMade) {
+        this.paymentsMade = paymentsMade;
     }
 
     //GETTERS & SETTERS @ManyToOne

@@ -40,8 +40,16 @@ public class TransactionController {
             return new ResponseEntity<>("The amount must be greater than zero", HttpStatus.FORBIDDEN);
         }
 
-        if(description.isEmpty() || description.isBlank() || originAccount.isEmpty() || originAccount.isBlank() || destinationAccount.isEmpty() || destinationAccount.isBlank()){
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if(description.isEmpty() || description.isBlank()){
+            return new ResponseEntity<>("Enter a description", HttpStatus.FORBIDDEN);
+        }
+
+        if(originAccount.isEmpty() || originAccount.isBlank()){
+            return new ResponseEntity<>("Enter a source account", HttpStatus.FORBIDDEN);
+        }
+
+        if(destinationAccount.isEmpty() || destinationAccount.isBlank()){
+            return new ResponseEntity<>("Choose a target account", HttpStatus.FORBIDDEN);
         }
 
         if(originAccount.equals(destinationAccount)){
@@ -60,13 +68,13 @@ public class TransactionController {
             return new ResponseEntity<>("You do not have sufficient funds to make the transfer.", HttpStatus.FORBIDDEN);
         }
 
-        Transaction fromTransaction = new Transaction(DEBIT, -amount, description + " to " + destinationAccount, LocalDateTime.now());
+        Transaction fromTransaction = new Transaction(DEBIT, -amount, description + " to " + destinationAccount, LocalDateTime.now(), (fromAccount.getBalance() - amount));
         fromAccount.addTransaction(fromTransaction);
         fromAccount.setBalance(fromAccount.getBalance() - amount);
         transactionService.saveTransaction(fromTransaction);
 
 
-        Transaction toTransaction = new Transaction(CREDIT, amount, description + " from " + originAccount, LocalDateTime.now());
+        Transaction toTransaction = new Transaction(CREDIT, amount, description + " from " + originAccount, LocalDateTime.now(), (toAccount.getBalance() + amount));
         toAccount.addTransaction(toTransaction);
         toAccount.setBalance(toAccount.getBalance() + amount);
         transactionService.saveTransaction(toTransaction);

@@ -8,6 +8,7 @@ public class ClientLoanDTO {
     private String name;
     private Double amount;
     private Integer payments;
+    private Integer paymentsMade;
 
     //CONSTRUCTOR
     public ClientLoanDTO(ClientLoan clientLoan) {
@@ -16,6 +17,7 @@ public class ClientLoanDTO {
         this.name = clientLoan.getLoan().getName();
         this.amount = clientLoan.getAmount();
         this.payments = clientLoan.getPayments();
+        this.paymentsMade = clientLoan.getPaymentsMade();
     }
 
     //GETTERS
@@ -37,5 +39,9 @@ public class ClientLoanDTO {
 
     public Integer getPayments() {
         return payments;
+    }
+
+    public Integer getPaymentsMade() {
+        return paymentsMade;
     }
 }

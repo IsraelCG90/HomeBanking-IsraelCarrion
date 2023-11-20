@@ -29,6 +29,7 @@ createApp({
       axios.get('/api/loan')
         .then(({ data }) => {
           this.loans = data.sort((a, b) => b.id - a.id);
+          console.log(this.loans)
         })
         .catch(err => console.log(err))
     },
@@ -40,25 +41,53 @@ createApp({
         .catch(err => console.log(err))
     },
     requestLoan() {
-      axios.post('/api/loan', { id: this.loanSelected, amount: this.amount, payments: this.paymentSelected, toAccount: this.accountSelected })
-        .then(() => {
-          location.pathname = "/web/pages/accounts.html"
-        })
-        .catch(err => console.log(err))
+      Swal.fire({
+        title: "Apply for a loan",
+        text: "Want to apply for a loan?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, request!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.post('/api/loan', { id: this.loanSelected, amount: this.amount, payments: this.paymentSelected, toAccount: this.accountSelected })
+            .then(() => {
+              Swal.fire({
+                title: "Approved!",
+                text: "Your loan was approved.",
+                icon: "success"
+              }), setTimeout(() => { location.pathname = "/web/pages/accounts.html" }, 1700);
+              ;
+            })
+            .catch(err => {
+              Swal.fire({
+                title: "error",
+                text: err.response.data,
+                icon: "error"
+              });
+            })
+        }
+      });
     },
-    logout() {
-      axios.post('/api/logout')
-        .then(() => {
-          location.pathname = "/web/index.html"
-        })
+
+    logout(){
+      Swal.fire({
+        title: "Log off",
+        text: "Do you want to close your session?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, log off!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.post('/api/logout')
+          .then(() => {
+            location.pathname="/web/index.html"
+          })
+        }
+      });
     }
   },
-
-  // computed: {
-  //   updatePayments() {
-  //     this.paymentsLoans = this.loans.find(l => l.id == this.loanSelected);
-  //     console.log(this.paymentsLoans)
-  //   }
-  // },
-
 }).mount("#app");

@@ -3,42 +3,80 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-        clients: [],
-        clientsText: "",
-        firtName:"",
-        lastName:"",
-        email:""
+        name: "",
+        maxAmount: '',
+        interest: '',
+        inputPayments: '',
+        payments: [],
     };
   },
 
   created(){
-    this.loadData();
+    
   },
 
   methods:{
-    loadData(){
-        axios.get('http://localhost:8080/api/clients')
-        .then(({data}) => {
-            this.clients = data._embedded.clients;
-            this.clientsText = data;
-        })
-        .catch(err => console.log(err))
+    createLoan(){
+      Swal.fire({
+        title: "Create loan",
+        text: "Do you want create a loan?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, create!"
+      }).then((result) => {
+        if(result.isConfirmed){
+          axios.post('/api/loan/create', `name=${this.name}&maxAmount=${this.maxAmount}&interest=${this.interest}&payments=${this.payments}`)
+            .then(() => {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                iconColor: 'green',
+                title: 'The loan was created!',
+                showConfirmButton: false,
+                timer: 1500
+              }), setTimeout(() => { location.pathname = "/web/pages/loan-application.html" }, 1800)
+            })
+            .catch(err => {
+              Swal.fire({
+                title: "error",
+                text: err.response.data,
+                icon: "error"
+              });
+            })
+        }
+      })
     },
-    addClient() {
-      if (this.firstName == "" || this.lastName == "" || this.email == "") {
-          alert("Debe completar los campos");
-      } else {
-          this.postClient();
+
+    addPayments(){
+      if(this.inputPayments > 0 && !this.payments.includes(this.inputPayments)){
+        this.payments.push(this.inputPayments);
+        this.inputPayments= ''
       }
     },
-    postClient(){
-        axios.post('http://localhost:8080/api/clients', {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email
-        })
-        .catch(err => console.log(err))
-        this.loadData();
+
+    deletePayments(){
+      this.payments = []
+    },
+
+    logout(){
+      Swal.fire({
+        title: "Log off",
+        text: "Do you want to close your session?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, log off!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.post('/api/logout')
+          .then(() => {
+            location.pathname="/web/index.html"
+          })
+        }
+      });
     }
   },
 }).mount("#app");

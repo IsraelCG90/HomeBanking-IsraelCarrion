@@ -22,14 +22,28 @@ createApp({
         })
         .catch(err => console.log(err))
     },
+
     dateFormat(date) {
       return moment(date).format('lll');
     },
+
     logout(){
-      axios.post('/api/logout')
-      .then( response => {
-        location.pathname="/web/index.html"
-      })
+      Swal.fire({
+        title: "Log off",
+        text: "Do you want to close your session?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, log off!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.post('/api/logout')
+          .then(() => {
+            location.pathname="/web/index.html"
+          })
+        }
+      });
     }
   }
 }).mount("#app");

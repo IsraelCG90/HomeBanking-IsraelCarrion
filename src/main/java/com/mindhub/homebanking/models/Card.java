@@ -20,6 +20,7 @@ public class Card {
     private String cvv;
     private LocalDate thruDate;
     private LocalDate fromDate;
+    private Boolean isDelete = false;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
@@ -99,6 +100,14 @@ public class Card {
 
     public void setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
+    }
+
+    public boolean delete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
     }
 
     //GETTER & SETTERS @ManyToOne

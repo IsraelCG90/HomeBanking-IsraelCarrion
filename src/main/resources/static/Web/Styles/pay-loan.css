@@ -17,7 +17,7 @@ main{
 
 .rightside {
     background-color: #ffffff;
-	width: 35rem;
+	width: 19rem;
 	border-radius: 1.5rem;
     padding: 1rem 2rem 3rem 3rem;
 }
@@ -67,6 +67,38 @@ p {
     color: black;
 }
 
+.paymentsLoans{
+    margin-top: 1rem;
+}
+
+.pPay{
+    font-size: 1rem;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .rightside{
+        width: 30rem;
+    }
+    .pPay{
+        font-size: 1.2rem;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .card{
+        flex-direction: column;
+        width: auto;
+    }
+
+    .rightside{
+        border-bottom-left-radius: 1.5rem;
+        padding:0.5rem 3rem 3rem 2rem;
+        border-radius: 1.5rem;
+        width: 35rem;
+    }
+}
+
 /*Titulo de bienvenida*/
 .title {
     display: flex;
@@ -75,7 +107,6 @@ p {
     justify-content: center;
     padding: 1rem 0rem;
     text-align: center;
-    width: 90%;
 }
 
 h1 {
@@ -86,29 +117,6 @@ h1 {
     font-size: 2.5rem;
 }
 
-@media only screen and (max-width: 1000px) {
-    .card{
-        flex-direction: column;
-        width: auto;
-      
-    }
-
-    .leftside{
-        width: 100%;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 0;
-        border-top-right-radius:0;
-        border-radius:0;
-    }
-
-    .rightside{
-        width:auto;
-        border-bottom-left-radius: 1.5rem;
-        padding:0.5rem 3rem 3rem 2rem;
-        border-radius:0;
-    }
-}
-
 /*RADIOS*/
 .form {
     --background: rgba(255, 255, 255, 0.753);
@@ -116,8 +124,8 @@ h1 {
     --radio: #ce75af;
     --radio-checked: #fb9e42;
     --radio-size: 23px;
-    --width: 20rem;
-    --height: 50px;
+    --width: 14rem;
+    --height: auto;
     --border-radius: 10px;
     background: var(--background);
     width: var(--width);
@@ -126,10 +134,14 @@ h1 {
     color: var(--text);
     position: relative;
     box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
-    padding: 30px 20px;
+    padding: 20px 20px;
     display: grid;
     grid-template-columns: auto var(--radio-size);
     align-items: center;
+}
+
+.divRadio{
+    width: 100% !important;
 }
   
 .form label {
@@ -220,22 +232,3 @@ h1 {
       transform: scale(1, 1);
     }
 }
-  
-.socials {
-    position: fixed;
-    display: block;
-    left: 20px;
-    bottom: 20px;
-}
-  
-.socials > a {
-    display: block;
-    width: 30px;
-    opacity: .2;
-    transform: scale(var(--scale, 0.8));
-    transition: transform 0.3s cubic-bezier(0.38, -0.12, 0.24, 1.91);
-}
-  
-.socials > a:hover {
-    --scale: 1;
-} 

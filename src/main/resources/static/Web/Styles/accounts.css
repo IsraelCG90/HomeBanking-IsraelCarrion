@@ -1,65 +1,90 @@
-main{
-    background-color: #fcbc8118; 
+main {
+    background-color: #fcbc8118;
 }
 
-.welcome{
+.welcome {
     color: rgb(104, 102, 102);
 }
 
-.cardAcount{
+.cardAcount {
     border: none !important;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .13), 0 1px 1px 0 rgba(0, 0, 0, .11);
 }
 
-.card-body{
-    font-size: 1.1rem ;
+.card-body {
+    font-size: 1.1rem;
 }
 
-span{
+span {
     font-size: 1rem;
     color: #e74c67;
 }
 
-.aAcounts{
+.aAcounts {
     text-decoration: none;
     color: #e74c67;
     font-size: 1.1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ce75af;
 }
 
-.midle{
+.aLoan {
+    text-decoration: none;
+    color: #e74c67;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.tituloTabla{
+    width: 90%;
+}
+
+.midle {
     border-top: 1px solid #ce75af;
     border-bottom: 1px solid #ce75af;
 }
 
-.amount{
+.end {
+    border-bottom: 1px solid #ce75af;
+    margin-bottom: 1rem;
+}
+
+.amount {
     width: 3.5rem;
     filter: invert(40%) sepia(33%) saturate(6912%) hue-rotate(329deg) brightness(107%) contrast(81%);
 }
 
-.table{
+.table {
     width: 90%;
     font-size: 0.8rem;
 }
 
-.card-text{
+.card-text {
     font-weight: 600;
 }
 
-.rowBorder{
+.rowBorder {
     border-top: 1px solid #ff7f50;
     border-bottom: 1px solid coral;
 }
 
-.headerRow{
+.headerRow {
     border-bottom: 1px solid coral;
 }
 
-.goOut{
+.goOut {
     color: black;
 }
 
-@media (min-width: 768px) { 
-    .table{
+#staticBackdropLabel {
+    font-size: 2rem !important;
+    color: #ea5455;
+}
+
+
+@media (min-width: 768px) {
+    .table {
         width: 60%;
         font-size: 1rem;
     }
@@ -70,7 +95,7 @@ span{
     transition: all 0.3s ease-in-out;
     font-family: "Dosis", sans-serif;
 }
-  
+
 .btn {
     width: 16rem;
     height: 3rem;
@@ -83,62 +108,230 @@ span{
     font-size: 1.2rem;
     color: white;
 }
-  
+
 .btn:hover {
     transform: translateY(3px);
     box-shadow: none;
     color: white;
 }
-  
+
 .btn:active {
     opacity: 0.5;
 }
 
 /*Titulo de bienvenida*/
-@import url('https://fonts.googleapis.com/css?family=Cairo');
-
-
 .title {
-	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-	text-align: center;
-	color: #FFF;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	letter-spacing: 1px;
-	line-height:2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 1rem 0rem;
+    text-align: center;
 }
 
 h1 {
-	background-image: url(https://media1.giphy.com/media/37oQNyNrbumM8wZtEg/giphy.gif?cid=ecf05e47kotjtoo106y2cbiqe4ufaqjwhiai3rj76ou8lqud&ep=v1_gifs_search&rid=giphy.gif&ct=g);
-	/* background-size: cover; */
-	color: transparent;
-	-moz-background-clip: text;
-	-webkit-background-clip: text;
-	text-transform: uppercase;
-	font-size: 2.5rem;
-	margin: 10px 0;
-    background-position: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #ea5455;
+    letter-spacing: 1px;
+    line-height: 2;
+    font-size: 3.8rem;
 }
 
-/* styling my button */
 
+
+/* styling my button */
 .white-mode {
-	text-decoration: none;
-	padding: 7px 10px;
-	background-color: #122;
-	border-radius: 3px;
-	color: #FFF;
-	transition: .35s ease-in-out;
-	position: absolute;
-	left: 15px;
-	bottom: 15px;
-	font-family: "Montserrat";
+    text-decoration: none;
+    padding: 7px 10px;
+    background-color: #122;
+    border-radius: 3px;
+    color: #FFF;
+    transition: .35s ease-in-out;
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    font-family: "Montserrat";
 }
 
 .white-mode:hover {
-	background-color: #FFF;
-	color: #122;
+    background-color: #FFF;
+    color: #122;
+}
+
+/* Button Delete */
+.noselect {
+    width: 200px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    background: #e62222;
+    margin-top: 1rem;
+}
+
+.noselect,
+.noselect span {
+    transition: 200ms;
+}
+
+.noselect .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+}
+
+.icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(160px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconDos {
+    font-size: 1.2rem;
+    fill: #eee;
+    color: white;
+}
+
+.noselect:hover {
+    background: #ff3636;
+}
+
+.noselect:hover .text {
+    color: transparent;
+}
+
+.noselect:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(25px);
+}
+
+.noselect:focus {
+    outline: none;
+}
+
+.noselect:active .icon i {
+    transform: scale(0.8);
+}
+
+/*RADIOS*/
+.form {
+    --background: rgba(255, 255, 255, 0.753);
+    --text: #2c2c2c;
+    --radio: #ce75af;
+    --radio-checked: #fb9e42;
+    --radio-size: 23px;
+    --width: 20rem;
+    --height: 50px;
+    --border-radius: 10px;
+    background: var(--background);
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
+    color: var(--text);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
+    padding: 30px 20px;
+    display: grid;
+    grid-template-columns: auto var(--radio-size);
+    align-items: center;
+}
+
+.form label {
+    cursor: pointer;
+}
+
+.form input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    height: var(--radio-size);
+    width: var(--radio-size);
+    outline: none;
+    margin: 0;
+    cursor: pointer;
+    border: 2px solid var(--radio);
+    background: transparent;
+    border-radius: 50%;
+    display: grid;
+    justify-self: end;
+    justify-items: center;
+    align-items: center;
+    overflow: hidden;
+    transition: border .5s ease;
+}
+
+.form input[type="radio"]::before,
+.form input[type="radio"]::after {
+    content: "";
+    display: flex;
+    justify-self: center;
+    border-radius: 50%;
+}
+
+.form input[type="radio"]::before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+    z-index: 1;
+    opacity: var(--opacity, 1);
+}
+
+.form input[type="radio"]::after {
+    position: relative;
+    width: calc(100% /2);
+    height: calc(100% /2);
+    background: var(--radio-checked);
+    top: var(--y, 100%);
+    transition: top 0.5s cubic-bezier(0.48, 1.97, 0.5, 0.63);
+}
+
+.form input[type="radio"]:checked {
+    --radio: var(--radio-checked);
+}
+
+.form input[type="radio"]:checked::after {
+    --y: 0%;
+    animation: stretch-animate .3s ease-out .17s;
+}
+
+.form input[type="radio"]:checked::before {
+    --opacity: 0;
+}
+
+.form input[type="radio"]:checked~input[type="radio"]::after {
+    --y: -100%;
+}
+
+.form input[type="radio"]:not(:checked)::before {
+    --opacity: 1;
+    transition: opacity 0s linear .5s;
+}
+
+@keyframes stretch-animate {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    28% {
+        transform: scale(1.15, 0.85);
+    }
+
+    50% {
+        transform: scale(0.9, 1.1);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
 }

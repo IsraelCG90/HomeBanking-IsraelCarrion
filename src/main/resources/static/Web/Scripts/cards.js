@@ -3,50 +3,52 @@ let { createApp } = Vue;
 createApp({
   data() {
     return {
-      toOrFrom: "",
-      fromAccounts: [],
-      mySelectAccount: "",
-      toMyAccounts: [],
-      toAccount: "",
-      amount: 0,
-      description: "",
+        credit: [],
+        debit: [],
+        localDate: '',
     };
   },
 
-  created() {
-    this.getToAccounts();
+  created(){
+    this.loadData();
+    this.createLocalDate();
   },
 
-  methods: {
-    getToAccounts() {
-      axios.get('/api/clients/current/accounts')
-        .then(({data}) => {
-          this.fromAccounts = data.map(e => e.number);
+  methods:{
+    loadData(){
+        axios.get('/api/clients/current')
+        .then( ({data}) => {
+            this.credit = data.cards.filter(card => card.type == "CREDIT").sort((a, b) => b.id - a.id);
+            this.debit = data.cards.filter(card => card.type == "DEBIT").sort((a, b) => b.id - a.id);
         })
         .catch(err => console.log(err))
     },
 
-    transfer() {
+    dateFormat(date) {
+        return moment(date).format("MM/YY");
+    },
+
+    deleteCard(id){
       Swal.fire({
-        title: "Make a transfer.",
-        text: "Do you want to make a transfer?",
+        title: "Delete card",
+        text: "Do you want to delete your card?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, transfer!"
+        confirmButtonText: "Yes, delete!"
       }).then((result) => {
         if(result.isConfirmed){
-          axios.post('/api/clients/current/transactions', `amount=${this.amount}&description=${this.description}&originAccount=${this.mySelectAccount}&destinationAccount=${this.toAccount}`)
+          axios.post('/api/clients/current/cards/delete', `id=${id}`)
             .then(() => {
               Swal.fire({
                 position: 'center',
                 icon: 'success',
                 iconColor: 'green',
-                title: 'The transfer has been made!',
+                title: 'The card was deleted!',
                 showConfirmButton: false,
                 timer: 1500
-              }), setTimeout(() => { location.pathname="/web/pages/accounts.html" }, 1800)
+              }), setTimeout(() => { this.loadData() }, 1800)
             })
             .catch(err => {
               Swal.fire({
@@ -57,6 +59,18 @@ createApp({
             })
         }
       })
+    },
+
+    createCard(){
+      location.pathname="/web/pages/create-cards.html"
+    },
+
+    createLocalDate() {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+      this.localDate = `${year}-${month}-${day}`;
     },
 
     logout(){
@@ -78,11 +92,4 @@ createApp({
       });
     }
   },
-  computed:{
-    filterAccounts(){
-      this.toMyAccounts = this.fromAccounts.filter(e => e !== this.mySelectAccount);
-      console.log(this.toMyAccounts)
-    }
-  }
-
 }).mount("#app");

@@ -1,59 +1,69 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#app{
-    display: grid;
-    min-height: 100vh;
-    grid-template-rows: auto 1fr auto;
+#app {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
 }
 
-.nav-item{
-    font-size: 1.5rem;
-}
-.nav-link:hover{
-    transform: scale(1.1);
-    text-decoration: overline;
-    background: linear-gradient(#e74c67,#fb9e42);
-    -webkit-background-clip: text;
-    color: transparent;
+.nav-item {
+  font-size: 1.5rem;
 }
 
-.logotip{
-    width: 13rem;
+.nav-link:hover {
+  transform: scale(1.1);
+  text-decoration: overline;
+  background: linear-gradient(#e74c67, #fb9e42);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-footer{
-    height: 7rem;
+.logotip {
+  width: 13rem;
 }
 
-.redes{
-    font-size: 2rem;
-    background: linear-gradient(#e74c67,#fb9e42);
-    -webkit-background-clip: text;
-    color: transparent;
+footer {
+  height: 7rem;
 }
 
-.p{
-    font-weight: 700;
-    font-size: 1.5rem;
-    background: linear-gradient(#e74c67,#fb9e42);
-    -webkit-background-clip: text;
-    color: transparent;  
+.redes {
+  font-size: 2rem;
+  background: linear-gradient(#e74c67, #fb9e42);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-@media (min-width: 768px) { 
-    .logotip{
-        width: 15rem;
-    }
-    footer{
-        height: 5rem;
-    }
-    .navbar-nav{
-        gap: 0.2rem;
-    }
+.p {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(#e74c67, #fb9e42);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.redes2 {
+  font-size: 1.2rem;
+  background: linear-gradient(#e74c67, #fb9e42);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .logotip {
+    width: 15rem;
+  }
+
+  footer {
+    height: 5rem;
+  }
+
+  .navbar-nav {
+    gap: 0.2rem;
+  }
 
 }
 
@@ -76,14 +86,12 @@ footer{
 
 .button-85:before {
   content: "";
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #ff00c8,
-    #ff0000
-  );
+  background: linear-gradient(45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #ff00c8,
+      #ff0000);
   position: absolute;
   top: -2px;
   left: -2px;
@@ -102,9 +110,11 @@ footer{
   0% {
     background-position: 0 0;
   }
+
   50% {
     background-position: 400% 0;
   }
+
   100% {
     background-position: 0 0;
   }
@@ -123,6 +133,6 @@ footer{
   color: black;
 }
 
-.bi-box-arrow-right{
-    color: black;
+.bi-box-arrow-right {
+  color: black;
 }

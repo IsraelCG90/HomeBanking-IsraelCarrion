@@ -2,23 +2,10 @@ main{
     background-color: #fcbc8118; 
 }
 
-.card {
-	width: 20rem;
-    margin: auto;
-    background: white;
-    position:center;
-    align-self: center;
-    top: 50rem;
-    border-radius: 1.5rem;
-    box-shadow: 4px 3px 20px #3535358c;
-    display:flex;
-    flex-direction: row;
-}
-
 .rightside {
     background-color: #ffffff;
 	width: 35rem;
-	border-radius: 1.5rem;
+	border-radius: 1.5rem !important;
     padding: 1rem 2rem 3rem 3rem;
 }
 
@@ -67,6 +54,24 @@ p {
     color: black;
 }
 
+.paymentsLoans{
+    margin-top: 1rem;
+}
+
+.buttonPay{
+    padding: 0rem 0.7rem;
+    border-radius: 1.5rem;
+    border: none;
+    background: linear-gradient(135deg, #ce75af 0%, #fcbc81 100%);
+    font-weight: 600;
+    color: white;
+}
+
+.buttonPay:hover{
+	transform: scale(1.05) translateY(-3px);
+    box-shadow: 3px 3px 6px #38373785;
+}
+
 /*Titulo de bienvenida*/
 .title {
     display: flex;
@@ -78,12 +83,12 @@ p {
     width: 90%;
 }
 
-h1 {
+h2{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: #ea5455;
     letter-spacing: 1px;
     line-height: 2;
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -220,22 +225,3 @@ h1 {
       transform: scale(1, 1);
     }
 }
-  
-.socials {
-    position: fixed;
-    display: block;
-    left: 20px;
-    bottom: 20px;
-}
-  
-.socials > a {
-    display: block;
-    width: 30px;
-    opacity: .2;
-    transform: scale(var(--scale, 0.8));
-    transition: transform 0.3s cubic-bezier(0.38, -0.12, 0.24, 1.91);
-}
-  
-.socials > a:hover {
-    --scale: 1;
-} 

@@ -1,5 +1,6 @@
 package com.mindhub.homebanking.services.implement;
 
+import com.mindhub.homebanking.dto.ClientLoanDTO;
 import com.mindhub.homebanking.models.ClientLoan;
 import com.mindhub.homebanking.repositories.ClientLoanRepository;
 import com.mindhub.homebanking.services.ClientLoanService;
@@ -14,5 +15,10 @@ public class ClientLoanServiceImpl implements ClientLoanService {
     @Override
     public void saveClientLoan(ClientLoan clientLoan) {
         clientLoanRepository.save(clientLoan);
+    }
+
+    @Override
+    public ClientLoan findLoanById(Long id) {
+        return clientLoanRepository.findById(id).orElse(null);
     }
 }

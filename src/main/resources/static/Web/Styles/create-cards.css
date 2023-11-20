@@ -13,7 +13,6 @@ h4{
 }
   
 
-
 .form {
     --background: #fcbc8118;
     --text: #080808;
@@ -106,6 +105,25 @@ h4{
     --opacity: 1;
     transition: opacity 0s linear .5s;
 }
+
+@keyframes stretch-animate {
+    0% {
+      transform: scale(1, 1);
+    }
+  
+    28% {
+      transform: scale(1.15, 0.85);
+    }
+  
+    50% {
+      transform: scale(0.9, 1.1);
+    }
+  
+    100% {
+      transform: scale(1, 1);
+    }
+    
+}
   
 .bi-box-arrow-left{
     color: black !important;
@@ -131,42 +149,23 @@ h4{
     color: #504e4e;
 }
 
-@keyframes stretch-animate {
-    0% {
-      transform: scale(1, 1);
-    }
-  
-    28% {
-      transform: scale(1.15, 0.85);
-    }
-  
-    50% {
-      transform: scale(0.9, 1.1);
-    }
-  
-    100% {
-      transform: scale(1, 1);
-    }
-    
+/*Titulo de bienvenida*/
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0rem;
+    text-align: center;
+    width: 90%;
 }
-  
-.socials {
-    position: fixed;
-    display: block;
-    left: 20px;
-    bottom: 20px;
-}
-  
-.socials > a {
-    display: block;
-    width: 30px;
-    opacity: .2;
-    transform: scale(var(--scale, 0.8));
-    transition: transform 0.3s cubic-bezier(0.38, -0.12, 0.24, 1.91);
-}
-  
-.socials > a:hover {
-    --scale: 1;
+
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #ea5455;
+    letter-spacing: 1px;
+    line-height: 2;
+    font-size: 2.5rem;
 }
   
 /*Boton*/

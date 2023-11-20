@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+
+import static com.mindhub.homebanking.utils.CardUtils.generateCvvCard;
+import static com.mindhub.homebanking.utils.CardUtils.generateNumberCard;
 
 @RestController
 @RequestMapping("/api")
@@ -24,31 +24,6 @@ public class CardController {
     private ClientServiceImpl clientService;
     @Autowired
     private CardServiceImpl cardService;
-
-    public int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
-    }
-
-    public String generateNumberCard() {
-        StringBuilder cardNumber;
-        do {
-            cardNumber = new StringBuilder();
-            for (int i = 0; i < 16; i++) {
-                cardNumber.append(getRandomNumber(0, 9));
-                if ((i + 1) % 4 == 0 && i != 15) cardNumber.append("-");
-            }
-        } while (cardService.existsCardByNumber(cardNumber.toString()));
-        return cardNumber.toString();
-    }
-
-    public String generateCvvCard() {
-        StringBuilder cvvNumber = new StringBuilder();
-        for (byte i = 0; i <= 2; i++) {
-            cvvNumber.append(getRandomNumber(0, 9));
-        }
-        return cvvNumber.toString();
-    }
-
 
     @PostMapping("/clients/current/cards")
     public ResponseEntity<String> newCard(Authentication authentication, @RequestParam String cardType, @RequestParam String cardColor){
@@ -65,15 +40,29 @@ public class CardController {
 
         int numberOfCardType = (int) client.getCards().stream().filter(card -> card.getType().equals(CardType.valueOf(cardType))).count();
 
-        if (numberOfCardType == 3) {
-            return new ResponseEntity<>("You cannot have more than three cards of the same type.", HttpStatus.FORBIDDEN);
+        if (cardService.existsByClientAndTypeAndColorAndIsDeleted(client, CardType.valueOf(cardType), CardColor.valueOf(cardColor), false)) {
+            return new ResponseEntity<>("You cannot apply for a card of the same type.", HttpStatus.FORBIDDEN);
         }
 
-        Card card = new Card(client.nameCard(), CardType.valueOf(cardType), CardColor.valueOf(cardColor), generateNumberCard(), generateCvvCard(), LocalDate.now().plusYears(5), LocalDate.now());
+        String cardNumber;
+        do {
+            cardNumber = generateNumberCard();
+        } while (cardService.existsCardByNumber(cardNumber));
+
+        Card card = new Card(client.nameCard(), CardType.valueOf(cardType), CardColor.valueOf(cardColor), cardNumber, generateCvvCard(), LocalDate.now().plusYears(5), LocalDate.now());
         client.addCard(card);
         cardService.saveCard(card);
         clientService.saveClient(client);
 
         return new ResponseEntity<>("Card created successfully", HttpStatus.CREATED);
+    }
+
+    @PostMapping("/clients/current/cards/delete")
+    public ResponseEntity<String> deleteCard(@RequestParam Long id){
+        if (!cardService.existsCardById(id)){
+            return new ResponseEntity<>("The card you are trying to delete does not exist.", HttpStatus.FORBIDDEN);
+        }
+        cardService.deleteCard(id);
+        return new ResponseEntity<>("The card was successfully removed", HttpStatus.OK);
     }
 }

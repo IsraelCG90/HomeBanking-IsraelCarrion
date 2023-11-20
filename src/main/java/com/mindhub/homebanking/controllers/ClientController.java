@@ -2,9 +2,8 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dto.ClientDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.services.implement.AccountServiceImpl;
 import com.mindhub.homebanking.services.implement.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static com.mindhub.homebanking.utils.AccountUtils.accountNumber;
 
 @RestController
 @RequestMapping("/api")
@@ -28,30 +28,14 @@ public class ClientController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @RequestMapping("/clients")
+    @GetMapping("/clients")
     public List<ClientDTO> getClients(){
         return clientService.getAllClientsDto();
     }
 
-    @RequestMapping("/clients/{id}")
+    @GetMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
         return clientService.getClientDtoById(id);
-    }
-
-    //CREATE NUMBER ACCOUNT
-    public int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
-    }
-
-    public String accountNumber() {
-        StringBuilder accountNumber;
-        do {
-            accountNumber = new StringBuilder();
-            for (byte i = 0; i <= 2; i++) {
-                accountNumber.append(getRandomNumber(0, 9));
-            }
-        } while (accountService.existsAccountByNumber("VIN" + accountNumber));
-        return "VIN" + accountNumber;
     }
 
     @PostMapping("/clients")
@@ -80,7 +64,12 @@ public class ClientController {
         Client client = new Client(firstName, lastName,email, passwordEncoder.encode(password), false);
         clientService.saveClient(client);
 
-        Account account = new Account(accountNumber(), LocalDate.now(), 0);
+        String accountNumber;
+        do {
+            accountNumber = accountNumber();
+        } while (accountService.existsAccountByNumber(accountNumber));
+
+        Account account = new Account(accountNumber, LocalDate.now(), 0, AccountType.CURRENT);
         client.addAccount(account);
 
         accountService.saveAccount(account);
@@ -88,7 +77,7 @@ public class ClientController {
         return new ResponseEntity<>("Client created successfully", HttpStatus.CREATED);
     }
 
-    @RequestMapping("/clients/current")
+    @GetMapping("/clients/current")
     public ClientDTO getClientCurrent(Authentication authentication){
         return new ClientDTO(clientService.findClientByEmail(authentication.getName()));
     }

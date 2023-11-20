@@ -59,7 +59,24 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Set<AccountDTO> findAccountsDtoByClient(Client client) {
-        return findAccountsByClient(client).stream().map(AccountDTO::new).collect(Collectors.toSet());
+        return findAccountsByClient(client).stream().filter(account -> !account.getDelete()).map(AccountDTO::new).collect(Collectors.toSet());
+    }
+
+    @Override
+    public boolean balanceLessThanEqualZero(Long id, Double balance) {
+        return accountRepository.existsByIdAndBalanceLessThanEqual(id, balance);
+    }
+
+    @Override
+    public void deleteAccount(Long id) {
+        Account account = accountRepository.findById(id).orElse(null);
+        account.setDelete(true);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public int countByClientAndDelete(Client client) {
+        return accountRepository.countByClientAndIsDelete(client, false);
     }
 
 }

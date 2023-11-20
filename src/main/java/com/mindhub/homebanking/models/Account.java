@@ -18,6 +18,10 @@ public class Account {
     private String number;
     private LocalDate creationDate;
     private double balance;
+    private Boolean isDelete = false;
+
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
@@ -29,10 +33,11 @@ public class Account {
     //CONSTRUCTORS
     public Account() {
     }
-    public Account(String number, LocalDate creationDate, double balance) {
+    public Account(String number, LocalDate creationDate, double balance, AccountType accountType) {
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
+        this.accountType = accountType;
     }
 
     //GETTER ID
@@ -63,6 +68,22 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     //GETTER @OneToMany

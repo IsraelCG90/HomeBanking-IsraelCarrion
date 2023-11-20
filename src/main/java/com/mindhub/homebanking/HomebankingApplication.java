@@ -116,10 +116,6 @@ public class HomebankingApplication {
 			israel.addCard(israelC1);
 			cardRepository.save(israelC1);
 
-			//CLIENT-3 ADMIN
-			Client admin = new Client("Carla", "Carrion", "carlac@gmail.com", "Admin", true);
-			clientRepository.save(admin);
-
 		};
 	}
 */

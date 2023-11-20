@@ -14,4 +14,8 @@ public interface LoanService {
     boolean existsLoanById(Long id);
 
     Loan findLoanById(Long id);
+
+    void saveLoan(Loan loan);
+
+    boolean existsLoanByName(String name);
 }

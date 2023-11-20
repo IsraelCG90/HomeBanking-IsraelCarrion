@@ -2,19 +2,22 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dto.AccountDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.services.implement.AccountServiceImpl;
 import com.mindhub.homebanking.services.implement.ClientServiceImpl;
+import com.mindhub.homebanking.services.implement.TransactionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import static com.mindhub.homebanking.utils.AccountUtils.accountNumber;
 
 @RestController
 @RequestMapping("/api")
@@ -25,40 +28,36 @@ public class AccountController {
     @Autowired
     private ClientServiceImpl clientService;
 
-    public int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
-    }
+    @Autowired
+    private TransactionServiceImpl transactionService;
 
-    public String accountNumber() {
-        StringBuilder accountNumber;
-        do {
-            accountNumber = new StringBuilder();
-            for (byte i = 0; i <= 2; i++) {
-                accountNumber.append(getRandomNumber(0, 9));
-            }
-        } while (accountService.existsAccountByNumber("VIN" + accountNumber));
-        return "VIN" + accountNumber;
-    }
-
-    @RequestMapping("/accounts")
+    @GetMapping("/accounts")
     public Set<AccountDTO> getAccounts(){
         return accountService.getAllAccountsDto();
     }
 
-    @RequestMapping("/accounts/{id}")
+    @GetMapping("/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
         return accountService.getAccountDtoById(id);
     }
 
     @PostMapping("/clients/current/accounts")
-    public ResponseEntity<String> newAccount(Authentication authentication){
+    public ResponseEntity<String> newAccount(Authentication authentication, @RequestParam String accountType){
+        if (accountType.isBlank() || !(accountType.equals("CURRENT") || accountType.equals("SAVING"))) {
+            return new ResponseEntity<>("You must select a valid account type.", HttpStatus.FORBIDDEN);
+        }
         Client client = clientService.findClientByEmail(authentication.getName());
 
-        if(client.getAccounts().size() >= 3){
+        if(accountService.countByClientAndDelete(client) >= 3){
             return new ResponseEntity<>("Cannot create any more accounts for this client", HttpStatus.FORBIDDEN);
         }
 
-        Account account = new Account(accountNumber(), LocalDate.now(), 0);
+        String accountNumber;
+        do {
+            accountNumber = accountNumber();
+        } while (accountService.existsAccountByNumber(accountNumber));
+
+        Account account = new Account(accountNumber, LocalDate.now(), 0, AccountType.valueOf(accountType));
         client.addAccount(account);
         clientService.saveClient(client);
         accountService.saveAccount(account);
@@ -66,9 +65,20 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping("/clients/current/accounts")
+    @GetMapping("/clients/current/accounts")
     public Set<AccountDTO> getAccount(Authentication authentication) {
         return accountService.findAccountsDtoByClient(clientService.findClientByEmail(authentication.getName()));
+    }
+
+    @PostMapping("/clients/current/accounts/delete")
+    public ResponseEntity<String> deleteCard(@RequestParam Long id){
+        if (!accountService.balanceLessThanEqualZero(id, 0.0)){
+            return new ResponseEntity<>("You must have your balance at zero in order to delete your account.", HttpStatus.FORBIDDEN);
+        }
+        accountService.deleteAccount(id);
+        transactionService.deleteByAccountId(accountService.getAccountById(id));
+
+        return new ResponseEntity<>("The Account was successfully eliminated", HttpStatus.OK);
     }
 
 }

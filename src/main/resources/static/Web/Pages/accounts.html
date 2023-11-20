@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/accounts.css">
     <title>Accounts</title>
@@ -57,32 +58,67 @@
                         <div class="d-flex align-items-center pt-2 pb-2 justify-content-between midle">
                             <div class="d-flex flex-column align-items-center ">
                                 <img src="../images/amount.png" alt="amount" class="amount">
-                                <span>Amount</span>
+                                <span>Balance</span>
                             </div>
                             <p class="card-text"> $ {{account.balance}}</p>
                         </div>
-                        <div class="d-flex align-items-center pt-2 pb-2 justify-content-between pb-4">
+                        <div class="d-flex align-items-center pt-2 pb-2 justify-content-between pb-2 end">
                             <div class="d-flex flex-column align-items-center">
                                 <img src="../images/calendar.png" alt="calendar" class="amount">
                                 <span>Creation</span>
                             </div>
                             <p class="card-text">{{account.creationDate}}</p>
                         </div>
-                        <a :href="`./account.html?id=${account.id}`" class="aAcounts">See yours moviments <i class="bi bi-chevron-right"></i></a>
+                        <div class="d-flex flex-column align-items-center">
+                            <a :href="`./account.html?id=${account.id}`" class="aAcounts">See yours moviments <i class="bi bi-chevron-right"></i></a>
+                            <button class="noselect" @click="deleteAccount(account.id)"><span class="text">Delete account</span><span class="icon"><i class="bi bi-x-lg iconDos"></i></span></button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-center pt-4">
-                <button type="button" class="btn" @click="createAccount" v-if="accounts.length < 3">Create New Account <i class="bi bi-chevron-right"></i></button>
+                <button type="button" class="btn" v-if="accounts.length < 3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create New Account <i class="bi bi-chevron-right"></i></button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="staticBackdropLabel">Select the type of account.</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form d-flex justify-content-around w-100">
+                            <div class="d-flex gap-3">
+                                <label class="form-check-label" for="current" > Current</label>
+                                <input class="form-check-input" type="radio" value="CURRENT" v-model="accountType" id="current" name="account">
+                            </div>
+                            <div class="d-flex gap-3">
+                                <label class="form-check-label" for="saving"> Saving </label>
+                                <input class="form-check-input" type="radio" value="SAVING" v-model="accountType" id="saving" name="account">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex flex-column align-items-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="createAccount">Create Account</button>
+                    </div>
+                </div>
+                </div>
             </div>
             <div class="mt-5 d-flex flex-column align-items-center">
-                <h3 class="welcome mb-3">Acquired Loans</h3>
+                <div class="d-flex justify-content-around tituloTabla">
+                    <h3 class="welcome mb-4">Acquired Loans</h3>
+                    
+                </div>
                 <table v-if="loans.length > 0" class="table">
                     <thead>
                         <tr class="headerRow">
                             <th>Type</th>
                             <th>Amount</th>
-                            <th class=" text-center">N° Quotas</th>
+                            <th class=" text-center">N° Dues</th>
+                            <th class="text-center">Dues made</th>
+                            <th class="text-center">Select</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,6 +126,9 @@
                             <td>{{ loan.name }}</td>
                             <td>${{ loan.amount }}</td>
                             <td class="text-center">{{ loan.payments }}</td>
+                            <td class="text-center">{{loan.paymentsMade}}</td>
+                            <td v-if="loan.paymentsMade < loan.payments" class="text-center d-flex justify-content-center gap-2"> <input type="radio" name="loan" id="loan"><a :href="`./pay-loan.html?id=${loan.id}`" class="aLoan">Pay<i class="bi bi-chevron-right"></i></a></td>
+                            <td class="text-center" v-else>Loan paid!</td>
                         </tr>
                     </tbody>
                 </table>
@@ -103,8 +142,9 @@
                 <a class="redes"><i class="bi bi-instagram"></i></a>
                 <a class="redes"><i class="bi bi-twitter-x"></i></a>
             </div>
-            <div>
-                <p class="p m-0">&copy;2023 Bank Nostrum</p>
+            <div class="d-flex align-items-center justify-content-center gap-2">
+                <p class="p m-0">&copy;2023 Bank Nostrum -</p>
+                <a href="../pages/manager.html" class="redes2"><i class="bi bi-file-earmark-lock2"></i></a>               
             </div>
         </footer>
     </div>
@@ -115,6 +155,7 @@
     <script>
         AOS.init();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
     <script src="../scripts/accounts.js"></script>
 </body>
 </html>

@@ -76,6 +76,13 @@ td, th{
     color: black;
 }
 
+.redes2 {
+    font-size: 1.2rem;
+    background: linear-gradient(#e74c67, #fb9e42);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
 @media (min-width: 768px) { 
     .accountDetail{
         width: 70%;
