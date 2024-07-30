@@ -16,7 +16,7 @@
         <header class="cabezera">
             <nav class="navbar navbar-expand-md">
                 <div class="container-fluid">
-                    <a class="navbar-brand fs-1" href="../index.html"><img class="logotip" src="../images/logotip.jpg" alt="logotip"></a>
+                    <a class="navbar-brand fs-1" href="#"><img class="logotip" src="../images/logotip.jpg" alt="logotip"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
                                 <a class="nav-link" href="./accounts.html">Accounts</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Cards</a>
+                                <a class="nav-link" :class="{ active: isActive('/web/pages/cards.html') }" href="#">Cards</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./loan-application.html">Loans</a>
@@ -45,78 +45,79 @@
         </header>
         <main>
             <div class="d-flex flex-column align-items-center pb-5">
-                <h2 class="mt-4">CREDIT CARDS</h2>
-                <div class="d-flex justify-content-center flex-wrap gap-4">
-                    <div v-for="card of credit" class="d-flex flex-column align-items-center"> 
-                        <div v-if="credit.length > 0" class="d-flex flex-column align-items-center">
-                            <div :class="{
-                                'card d-flex align-items-center cardGold': card.color =='GOLD',
-                                'card d-flex align-items-center cardTitanium': card.color == 'TITANIUM',
-                                'card d-flex align-items-center cardSilver': card.color == 'SILVER'
-                                }">
-                                <span class="info">CVV: {{card.cvv}}</span>
-                                <div class="d-flex justify-content-between w-100 mt-2 ms-1">
-                                    <img src="../images/logoCard.png" class="cardLogo"></img>
-                                    <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
-                                </div>
-                                <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
-                                    <img src="../images/chip.png" class="chip" alt="chip">
-                                    <span class="colorCard ">{{card.color}}</span>
-                                </div>
-                              <p :class="{'m-0 p-0 cardNumber mb-1 cardInvalid': card.thruDate < localDate, 'm-0 p-0 cardNumber mb-1': true}">{{card.number}}</p>
-                              <div class="d-flex justify-content-around w-100">
-                                <p :class="{'m-0 pData cardInvalid': card.thruDate < localDate, 'm-0 pData': true}">Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
-                                <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
-                              </div>
-                              <div class="d-flex align-items-center justify-content-between w-100 ">
-                                <p class="cardName ms-4 pt-2">{{card.cardHolder}} <p>
-                                <img src="../images/visa2.png" class="visa me-4" alt="visa">
-                              </div>
-                            </div>
-                            <button class="button" @click="deleteCard(card.id)">
-                                <span>Delete Card</span>
-                                <span><i class="bi bi-trash3"></i></span>
-                            </button>
+                <h2 class="mt-4 h2">CREDIT CARDS</h2>
+                <div class="bordeDebit">
+                  <div v-if="credit.length > 0" class="d-flex justify-content-center flex-wrap gap-4 ">
+                    <div v-for="card in credit" :key="card.id" class="d-flex flex-column align-items-center mt-3">
+                      <div :class="{
+                        'card d-flex align-items-center cardGold': card.color == 'GOLD',
+                        'card d-flex align-items-center cardTitanium': card.color == 'TITANIUM',
+                        'card d-flex align-items-center cardSilver': card.color == 'SILVER'
+                        }">
+                        <span class="info">CVV: {{card.cvv}}</span>
+                        <div class="d-flex justify-content-between w-100 mt-2 ms-1">
+                          <img src="../images/logoCard.png" class="cardLogo" alt="logoCard">
+                          <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
                         </div>
-                        <h6 v-else>You don't have credit cards.</h6>
-                    </div>
-                </div>
-                <h2 class="mt-5">DEBIT CARDS</h2>
-                <div class="d-flex justify-content-center flex-wrap gap-4" >
-                    <div v-for="card of debit" class="d-flex flex-column align-items-center"> 
-                        <div v-if="debit.length > 0" class="d-flex flex-column align-items-center">
-                            <div :class="{
-                                'card d-flex align-items-center cardGold': card.color =='GOLD',
-                                'card d-flex align-items-center cardTitanium': card.color == 'TITANIUM',
-                                'card d-flex align-items-center cardSilver': card.color == 'SILVER'
-                                }">
-                                <span class="info">CVV: {{card.cvv}}</span>
-                                <div class="d-flex justify-content-between w-100 mt-2 ms-1">
-                                    <img src="../images/logoCard.png" class="cardLogo"></img>
-                                    <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
-                                </div>
-                                <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
-                                    <img src="../images/chip.png" class="chip" alt="chip">
-                                    <span class="colorCard ">{{card.color}}</span>
-                                </div>
-                              <p :class="{'m-0 p-0 cardNumber mb-1 cardInvalid': card.thruDate < localDate, 'm-0 p-0 cardNumber mb-1': true}">{{card.number}}</p>
-                              <div class="d-flex justify-content-around w-100">
-                                <p :class="{'m-0 pData cardInvalid': card.thruDate < localDate, 'm-0 pData': true}">Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
-                                <p class="m-0 pData" >Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
-                              </div>
-                              <div class="d-flex align-items-center justify-content-between w-100 ">
-                                <p class="cardName ms-4 pt-2">{{card.cardHolder}} <p>
-                                <img src="../images/visa2.png" class="visa me-4" alt="visa">
-                              </div>
-                            </div>
-                            <button class="button" @click="deleteCard(card.id)">
-                                <span>Delete Card</span>
-                                <span><i class="bi bi-trash3"></i></span>
-                            </button>
+                        <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
+                          <img src="../images/chip.png" class="chip" alt="chip">
+                          <span class="colorCard ">{{card.color}}</span>
                         </div>
-                        <h6 v-else>You don't have debit cards.</h6>
+                        <p :class="{'m-0 p-0 cardNumber mb-1 cardInvalid': card.thruDate < localDate, 'm-0 p-0 cardNumber mb-1': true}">{{card.number}}</p>
+                        <div class="d-flex justify-content-around w-100">
+                          <p :class="{'m-0 pData cardInvalid': card.thruDate < localDate, 'm-0 pData': true}">Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
+                          <p class="m-0 pData">Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between w-100">
+                          <p class="cardName ms-4 pt-2">{{card.cardHolder}}</p>
+                          <img src="../images/visa2.png" class="visa me-4" alt="visa">
+                        </div>
+                      </div>
+                      <button class="button" @click="deleteCard(card.id)">
+                        <span>Delete Card</span>
+                        <span><i class="bi bi-trash3"></i></span>
+                      </button>
                     </div>
+                  </div>
+                  <h6 v-else class="mt-2 text-center">You don't have credit cards.</h6>                  
                 </div>
+                <h2 class="mt-5 h2">DEBIT CARDS</h2>
+                <div class="bordeDebit" >
+                    <div v-if="debit.length > 0" class="d-flex justify-content-center flex-wrap gap-4">
+                      <div v-for="card in debit" :key="card.id" class="d-flex flex-column align-items-center mt-3">
+                        <div :class="{
+                          'card d-flex align-items-center cardGold': card.color == 'GOLD',
+                          'card d-flex align-items-center cardTitanium': card.color == 'TITANIUM',
+                          'card d-flex align-items-center cardSilver': card.color == 'SILVER'
+                          }">
+                          <span class="info">CVV: {{card.cvv}}</span>
+                          <div class="d-flex justify-content-between w-100 mt-2 ms-1">
+                            <img src="../images/logoCard.png" class="cardLogo" alt="logoCard">
+                            <img src="../images/NFC.png" class="nfc me-1" alt="nfc">
+                          </div>
+                          <div class="d-flex justify-content-between w-100 mt-2 ps-3 pe-3 align-items-center">
+                            <img src="../images/chip.png" class="chip" alt="chip">
+                            <span class="colorCard ">{{card.color}}</span>
+                          </div>
+                          <p :class="{'m-0 p-0 cardNumber mb-1 cardInvalid': card.thruDate < localDate, 'm-0 p-0 cardNumber mb-1': true}">{{card.number}}</p>
+                          <div class="d-flex justify-content-around w-100">
+                            <p :class="{'m-0 pData cardInvalid': card.thruDate < localDate, 'm-0 pData': true}">Valid From: <span>{{dateFormat(card.thruDate)}}</span></p>
+                            <p class="m-0 pData">Good Thru: <span>{{dateFormat(card.fromDate)}}</span></p>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between w-100">
+                            <p class="cardName ms-4 pt-2">{{card.cardHolder}}</p>
+                            <img src="../images/visa2.png" class="visa me-4" alt="visa">
+                          </div>
+                        </div>
+                        <button class="button" @click="deleteCard(card.id)">
+                          <span>Delete Card</span>
+                          <span><i class="bi bi-trash3"></i></span>
+                        </button>
+                      </div>
+                    </div>
+                    <h6 v-else class="mt-2 text-center">You don't have debit cards.</h6>
+                </div>
+                  
                 <div class="d-flex justify-content-center pt-5" v-if="debit.length < 3 || credit.length < 3">
                     <button type="button" @click="createCard" class="btn">Request a New Card<i class="bi bi-chevron-right"></i></button>
                 </div>

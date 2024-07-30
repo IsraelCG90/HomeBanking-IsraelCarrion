@@ -10,6 +10,10 @@
   grid-template-rows: auto 1fr auto;
 }
 
+.cabezera {
+  border-bottom: #fb9e42 1px solid;
+}
+
 .nav-item {
   font-size: 1.5rem;
 }
@@ -22,24 +26,36 @@
   color: transparent;
 }
 
+.active {
+  background: linear-gradient(#e74c67, #fb9e42);
+  -webkit-background-clip: text;
+  color: transparent !important;
+}
+
 .logotip {
   width: 13rem;
 }
 
 footer {
   height: 7rem;
+  border-top: #fb9e42 1px solid;
 }
 
 .redes {
-  font-size: 2rem;
+  font-size: 1.5rem;
   background: linear-gradient(#e74c67, #fb9e42);
   -webkit-background-clip: text;
   color: transparent;
+  cursor: pointer;
+}
+
+.redes:hover {
+  transform: scale(1.1);
 }
 
 .p {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   background: linear-gradient(#e74c67, #fb9e42);
   -webkit-background-clip: text;
   color: transparent;

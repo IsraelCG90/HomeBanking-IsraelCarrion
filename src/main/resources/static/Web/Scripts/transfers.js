@@ -76,8 +76,14 @@ createApp({
           })
         }
       });
-    }
+    },
+
+    isActive(path) {
+      return window.location.pathname.endsWith(path);
+    },
+
   },
+
   computed:{
     filterAccounts(){
       this.toMyAccounts = this.fromAccounts.filter(e => e !== this.mySelectAccount);

@@ -106,4 +106,10 @@ public class Account {
         transactions.add(transaction);
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "number='" + number + '\'' +
+                '}';
+    }
 }

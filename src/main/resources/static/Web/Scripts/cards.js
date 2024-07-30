@@ -90,6 +90,11 @@ createApp({
           })
         }
       });
+    },
+
+    isActive(path) {
+      return window.location.pathname.endsWith(path);
     }
+
   },
 }).mount("#app");

@@ -19,7 +19,7 @@
         <header class="cabezera">
             <nav class="navbar navbar-expand-md">
                 <div class="container-fluid">
-                    <a class="navbar-brand fs-1" href="../index.html"><img class="logotip" src="../images/logotip.jpg"
+                    <a class="navbar-brand fs-1" href="#"><img class="logotip" src="../images/logotip.jpg"
                             alt="logotip"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
                                 <a class="nav-link" href="./cards.html">Cards</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Loans</a>
+                                <a class="nav-link" :class="{ active: isActive('/web/pages/loan-application.html') }" href="#">Loans</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./transfers.html">Transactions</a>
@@ -54,21 +54,22 @@
                 </div>
                 <div class="rightside mt-1">
                     <form class="d-flex flex-column">
+                        <p class="span">Loans</p>
                         <div class="d-flex flex-column align-items-center">
                             <div class="form d-flex justify-content-start flex-column gap-4">
                                 <div class="d-flex justify-content-between divRadio" v-for="loan of loans">
                                     <label class="form-check-label" for="my"> {{loan.name}} </label>
-                                    <input class="form-check-input" type="radio" :value="loan.id" v-model="loanSelected" id="my">
+                                    <input class="checkbox" type="radio" :value="loan.id" v-model="loanSelected" id="my">
                                 </div>
                             </div>
                         </div>
-                        <p class="mt-4">Payments</p>
+                        <p class="mt-4 span">Payments</p>
                         <select class="inputbox" name="card_type" id="card_type" v-model="paymentSelected">
                             <option v-for="payment in paymentsLoans.payments" :value="payment">{{payment}}</option>
                         </select>
-                        <p>Amount</p>
+                        <p  class="span">Amount</p>
                         <input type="number" class="inputbox" name="card_number" id="card_number" v-model="amount" />
-                        <p>Select your account</p>
+                        <p  class="span">Select your account</p>
                         <select class="inputbox" name="card_type" id="card_type" v-model="accountSelected">
                             <option v-for="account in yourAccounts" :value="account">{{account}}</option>
                         </select>

@@ -19,7 +19,7 @@
         <header class="cabezera">
             <nav class="navbar navbar-expand-md">
                 <div class="container-fluid">
-                    <a class="navbar-brand fs-1" href="../index.html"><img class="logotip" src="../images/Logotip.jpg"
+                    <a class="navbar-brand fs-1" href="#"><img class="logotip" src="../images/Logotip.jpg"
                             alt="logotip"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
                                 <a class="nav-link" href="./loan-application.html">Loans</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Transactions</a>
+                                <a class="nav-link" :class="{ active: isActive('/web/pages/transfers.html') }" href="#">Transactions</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link button-85" href="#" @click="logout"><i class="goOut bi bi-box-arrow-left"></i></a>
@@ -54,31 +54,30 @@
                 </div>
                 <div class="rightside mt-1">
                     <form class="d-flex flex-column">
-                        <div class="d-flex flex-column align-items-center w-100">
-                            <div class="form d-flex gap-3 justify-content-center">
-                                <div class="d-flex gap-3">
-                                    <label class="form-check-label" for="my"> My accounts </label>
-                                    <input class="form-check-input" type="radio" value="myAccounts" v-model="toOrFrom" id="my" >
-                                </div>
-                                <div class="d-flex gap-3">
-                                    <label class="form-check-label" for="others"> Others </label>
-                                    <input class="form-check-input" type="radio" value="Others" v-model="toOrFrom" id="others">
-                                </div>
+                        <p class="span">Select account</p>
+                        <div class="d-flex flex-column align-items-center gap-3 w-100 mb-4">
+                            <div class="d-flex justify-content-between opciones">
+                                <label class="form-check-label" for="my"> My accounts </label>
+                                <input class="checkbox" type="radio" value="myAccounts" v-model="toOrFrom" id="my" >
+                            </div>
+                            <div class="d-flex justify-content-between opciones">
+                                <label class="form-check-label" for="others"> Others </label>
+                                <input class="checkbox" type="radio" value="Others" v-model="toOrFrom" id="others">
                             </div>
                         </div>
-                        <p class="mt-4">From Account</p>
+                        <p class="mt-3 span">From Account</p>
                         <select class="inputbox" name="card_type" id="card_type" v-model="mySelectAccount" required>
                             <option v-for="account in fromAccounts" v-bind:value="account" @click="filterAccounts">{{account}}</option>
                         </select>
-                        <p>To Account</p>
+                        <p class="span">To Account</p>
                         <select v-if="toOrFrom == 'myAccounts'" class="inputbox" name="card_type" id="card_type" v-model="toAccount" required>
                             <option v-for="account of toMyAccounts" v-bind:value="account">{{account}}</option>
                         </select>
                         <input v-else type="text" class="inputbox" name="name" v-model="toAccount" required />
-                        <p>Amount</p>
+                        <p class="span">Amount</p>
                         <input type="number" class="inputbox" name="card_number" id="card_number" v-model="amount" required />
                         <div class="expcvv">
-                            <p class="expcvv_text2">Description</p>
+                            <p class="expcvv_text2 span">Description</p>
                             <input type="text" class="inputbox" name="cvv" id="cvv" v-model="description" required />
                         </div>
                         <p></p>

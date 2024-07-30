@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.mindhub.homebanking.utils.AccountUtils.accountNumber;
 
@@ -53,6 +55,10 @@ public class ClientController {
             return new ResponseEntity<>("Missing Email", HttpStatus.FORBIDDEN);
         }
 
+        if (!isValidEmail(email)) {
+            return new ResponseEntity<>("Invalid email format", HttpStatus.FORBIDDEN);
+        }
+
         if(password.isBlank()){
             return new ResponseEntity<>("Missing Password", HttpStatus.FORBIDDEN);
         }
@@ -80,6 +86,13 @@ public class ClientController {
     @GetMapping("/clients/current")
     public ClientDTO getClientCurrent(Authentication authentication){
         return new ClientDTO(clientService.findClientByEmail(authentication.getName()));
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
 }

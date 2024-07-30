@@ -19,7 +19,7 @@
         <header class="cabezera">
             <nav class="navbar navbar-expand-md">
                 <div class="container-fluid">
-                    <a class="navbar-brand fs-1" href="../index.html"><img class="logotip" src="../images/logotip.jpg"
+                    <a class="navbar-brand fs-1" href="#"><img class="logotip" src="../images/logotip.jpg"
                             alt="logotip"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
                                 <a class="nav-link" href="./cards.html">Cards</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Loans</a>
+                                <a class="nav-link" href="./loan-application.html">Loans</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./transfers.html">Transactions</a>
@@ -56,22 +56,22 @@
                     <form class="d-flex flex-column">
                         <div class="d-flex flex-column align-items-center">
                             <div class="form d-flex justify-content-start flex-column gap-4">
-                                <p class="m-0">Payment account</p>
+                                <p class="m-0 titulo">Payment account</p>
                                 <div class="d-flex justify-content-between divRadio" v-for="account of accounts">
                                     <label class="form-check-label" for="my"> {{account.number}} - ($ {{account.balance}})</label>
-                                    <input class="form-check-input" type="radio" :value="account.id" v-model="idAccount" id="my">
+                                    <input class="checkbox" type="radio" :value="account.id" v-model="idAccount" id="my">
                                 </div>
                             </div>
                         </div>
                         <div class="bg-secundary" >
-                            <p class="text-center">Summary</p>
-                            <p>Loan: {{loan.name}}</p>
-                            <p>Amount: ${{loan.amount}}</p>
-                            <p>Dues: {{loan.payments}}</p>
-                            <p >Payments made: {{loan.paymentsMade}}</p>
+                            <p class="text-center titulo">Summary</p>
+                            <p><span>Loan:</span> {{loan.name}}</p>
+                            <p><span>Amount:</span> ${{loan.amount}}</p>
+                            <p><span>Dues:</span> {{loan.payments}}</p>
+                            <p><span>Payments made:</span> {{loan.paymentsMade}}</p>
                         </div>
                         {{paymentForMade}}
-                        <p class="mt-4 pPay">Payment to be made: ${{paymentToBe}}</p>
+                        <p class="mt-4 pPay"><span>Payment to be made:</span> ${{paymentToBe}}</p>
                         <select class="inputbox" name="card_type" id="card_type" v-model="paymentSelected">
                             <option v-for="quota of arrayQuotas" :value="quota">{{quota}}</option>
                         </select>

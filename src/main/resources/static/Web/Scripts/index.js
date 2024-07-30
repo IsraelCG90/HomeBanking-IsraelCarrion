@@ -3,24 +3,28 @@ let { createApp } = Vue;
 createApp({
   data() {
     return {
-        accounts: [],
+      authenticated: false,
     };
   },
 
-  created(){
-    this.loadData();
+  created() {
+    this.checkAuthentication();
   },
 
-  methods:{
-    loadData(){
-        axios.get('/api/clients/current')
-        .then( ({data}) => {
-            this.accounts = data.accounts;
+  methods: {
+    checkAuthentication() {
+      axios.get('/api/auth/check')
+        .then(() => {
+          this.authenticated = true;
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err);
+          this.authenticated = false;
+          localStorage.removeItem('authenticated');
+        });
     },
-
-    logout(){
+ 
+    logout() {
       Swal.fire({
         title: "Log off",
         text: "Do you want to close your session?",
@@ -32,11 +36,34 @@ createApp({
       }).then((result) => {
         if (result.isConfirmed) {
           axios.post('/api/logout')
-          .then(() => {
-            location.pathname="/web/index.html"
-          })
+            .then(() => {
+              localStorage.removeItem('authenticated');
+              location.pathname = "/web/index.html"
+            })
         }
       });
+    },
+
+    showLoginAlert() {
+      Swal.fire({
+        title: "Access Denied",
+        text: "You need to log in or register to access this page.",
+        icon: "error",
+        confirmButtonText: "Ok"
+      });
+    },
+
+    checkAccess(page) {
+      if (this.authenticated) {
+        location.pathname = `./pages/${page}.html`;
+      } else {
+        this.showLoginAlert();
+      }
+    },
+
+    preventDefault(event) {
+      event.preventDefault();
     }
+
   },
 }).mount("#app");
